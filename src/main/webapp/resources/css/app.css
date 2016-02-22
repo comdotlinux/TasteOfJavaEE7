@@ -3,3 +3,7 @@
     Author     : Guruprasad Kulkarni <guru@linux.com>
 */
 
+.img-scale{
+    width: 40%;
+    height: auto;
+}
