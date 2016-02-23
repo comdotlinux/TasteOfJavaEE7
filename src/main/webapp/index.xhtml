@@ -5,36 +5,33 @@
         <title>My JSF Login Form</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"></link>
-        
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"></link>
-        
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        
-        <!-- <h:outputStylesheet name="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></h:outputStylesheet>
-        <h:outputStylesheet name="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"></h:outputStylesheet>
-        <h:outputScript name="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></h:outputScript>-->
         <h:outputStylesheet library="css" name="app.css"></h:outputStylesheet>
     </h:head>
     <h:body>
         <h3>Basic</h3>
         <p:panelGrid columns="2">
             <f:facet name="header">
-                <p:graphicImage name="images/wildfly_desktop_1440x900.jpg" styleClass="img-scale img-thumbnail" alt="Responsive image"/>
+                <p:graphicImage name="images/wildfly_desktop_1440x900.jpg" styleClass="img-scale img-thumbnail" alt="Wildfly Image"/>
             </f:facet>
 
-            <h:outputText value="Name:" />
-            <h:outputText value="Wildfly" />
+            <h:form>
+                <h:outputText value="Employee ID" />
+                <h:outputText value="10.0" />
 
-            <h:outputText value="Version:" />
-            <h:outputText value="10.0" />
 
-            <h:outputText value="Technology:" />
-            <h:outputText value="JavaEE" />
+                <h:outputText value="Version:" />
+                <h:inputText value="Wildfly" />
 
-            <h:outputText value="Version Supported:" />
-            <h:outputText value="7" />
+                <h:outputText value="Technology:" />
+                <h:outputText value="JavaEE" />
+
+                <h:outputText value="Version Supported:" />
+                <h:outputText value="7" />
+            </h:form>
         </p:panelGrid>
     </h:body>
 </html>
