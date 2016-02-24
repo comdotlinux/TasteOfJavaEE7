@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
@@ -13,6 +14,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -33,7 +36,8 @@ public class Employee implements Serializable {
     private long id;
 
     @Column(name = "birth_date")
-    private Timestamp birthdate;
+    @Temporal(TemporalType.DATE)
+    private Date birthdate;
 
     @Column(name = "first_name")
     private String firstname;
@@ -45,7 +49,8 @@ public class Employee implements Serializable {
     private Gender gender;
 
     @Column(name = "hire_date")
-    private Timestamp doj;
+    @Temporal(TemporalType.DATE)
+    private Date doj;
 
     /**
      *
@@ -55,12 +60,12 @@ public class Employee implements Serializable {
      * @param gender
      * @param doj
      */
-    public Employee(Timestamp birthdate, String firstname, String lastname, Gender gender, Timestamp doj) {
-        this.birthdate = (null != birthdate) ? new Timestamp(birthdate.getTime()) : null;
+    public Employee(Date birthdate, String firstname, String lastname, Gender gender, Date doj) {
+        this.birthdate = (null != birthdate) ? (Date) birthdate.clone() : null;
         this.firstname = firstname;
         this.lastname = lastname;
         this.gender = gender;
-        this.doj = (null != doj) ? new Timestamp(doj.getTime()) : null;
+        this.doj = (null != doj) ? (Date) doj.clone() : null;
     }
 
     /**
@@ -93,8 +98,8 @@ public class Employee implements Serializable {
      *
      * @return of this instance of {@linkplain Employee}
      */
-    public Timestamp getBirthdate() {
-        return (null != birthdate) ? new Timestamp(birthdate.getTime()) : null;
+    public Date getBirthdate() {
+        return (null != birthdate) ? (Date) birthdate.clone() : null;
     }
 
     /**
@@ -103,8 +108,8 @@ public class Employee implements Serializable {
      * @param birthdate set the birth date for this instance of
      * {@linkplain Employee}
      */
-    public void setBirthdate(Timestamp birthdate) {
-        this.birthdate = (null != birthdate) ? new Timestamp(birthdate.getTime()) : null;
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = (null != birthdate) ? (Date) birthdate.clone() : null;
     }
 
     /**
@@ -138,7 +143,7 @@ public class Employee implements Serializable {
     /**
      * Setter for Last Name
      *
-     * @param lastname set the lastname for this instance of
+     * @param lastname set the last name for this instance of
      * {@linkplain Employee}
      */
     public void setLastname(String lastname) {
@@ -168,8 +173,8 @@ public class Employee implements Serializable {
      *
      * @return of this instance of {@linkplain Employee}
      */
-    public Timestamp getDoj() {
-        return (null != doj) ? new Timestamp(doj.getTime()) : null;
+    public Date getDoj() {
+        return (null != doj) ? (Date) doj.clone() : null;
     }
 
     /**
@@ -178,8 +183,8 @@ public class Employee implements Serializable {
      * @param doj set the date of joining of this instance of
      * {@linkplain Employee}
      */
-    public void setDoj(Timestamp doj) {
-        this.doj = (null != doj) ? new Timestamp(doj.getTime()) : null;
+    public void setDoj(Date doj) {
+        this.doj = (null != doj) ? (Date) doj.clone() : null;
     }
 
     /**
