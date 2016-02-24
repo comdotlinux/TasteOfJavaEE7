@@ -16,6 +16,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -40,9 +42,13 @@ public class Employee implements Serializable {
     private Date birthdate;
 
     @Column(name = "first_name")
+    @NotNull
+    @Size(min = 3, max = 14)
     private String firstname;
 
     @Column(name = "last_name")
+    @NotNull
+    @Size(min = 3, max = 16)
     private String lastname;
 
     @Enumerated(EnumType.STRING)
@@ -53,14 +59,15 @@ public class Employee implements Serializable {
     private Date doj;
 
     /**
-     *
-     * @param birthdate
-     * @param firstname
-     * @param lastname
-     * @param gender
-     * @param doj
+     * Public constructor for convenience.
+     * 
+     * @param birthdate The birth date
+     * @param firstname The First name
+     * @param lastname The Last Name
+     * @param gender Gender, one from {@linkplain Gender}
+     * @param doj The date of joining
      */
-    public Employee(Date birthdate, String firstname, String lastname, Gender gender, Date doj) {
+    public Employee(String firstname, String lastname,Date birthdate, Gender gender, Date doj) {
         this.birthdate = (null != birthdate) ? (Date) birthdate.clone() : null;
         this.firstname = firstname;
         this.lastname = lastname;
