@@ -18,19 +18,31 @@
                 <p:graphicImage name="images/wildfly_desktop_1440x900.jpg" styleClass="img-scale img-thumbnail" alt="Wildfly Image"/>
             </f:facet>
 
+            <p:growl id="growl" showDetail="true" sticky="true" life="2000"/>  
             <h:form>
-                <h:outputText value="Employee ID" />
-                <h:outputText value="10.0" />
+
+                <p:outputLabel value="Employee ID" for="employeeId" />
+                <p:inputText id="employeeId" value="#{index.employee.id}" />
 
 
-                <h:outputText value="Version:" />
-                <h:inputText value="Wildfly" />
+                <p:outputLabel value="First Name" for="firstname"/>
+                <p:inputText id="firstname" value="#{index.employee.firstname}" />
 
-                <h:outputText value="Technology:" />
-                <h:outputText value="JavaEE" />
+                <p:outputLabel value="Last Name" for="lastname"/>
+                <p:inputText id="lastname" value="#{index.employee.lastname}" />
 
-                <h:outputText value="Version Supported:" />
-                <h:outputText value="7" />
+                <p:outputLabel value="Birthdate" for="birthdate"/>
+                <p:calendar id="birthdate" value="#{index.employee.birthdate}" maxdate="#{index.today}" />
+
+                <p:outputLabel value="Gender" for="gender"/>
+                <p:selectOneRadio id="gender" value="#{index.employee.gender}">
+                    <f:selectItems value="#{index.genderOptions}" var="gender" itemValue="#{gender}" itemLabel="#{gender.fullform}"/>
+                </p:selectOneRadio>
+
+                <p:outputLabel value="Date of Joining" for="doj" />
+                <p:calendar id="doj" value="#{index.employee.doj}" maxdate="#{index.today}" />
+                
+                <p:commandButton value="Submit" update="growl" icon="ui-icon-check" actionListener="#{index.addEmployee}"/>
             </h:form>
         </p:panelGrid>
     </h:body>
