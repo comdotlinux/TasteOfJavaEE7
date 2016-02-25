@@ -23,15 +23,15 @@
 
 
                 <p:outputLabel value="Employee ID" />
-                <p:outputLabel id="employeeId" value="#{actorView.employee.id}" />
+                <p:outputLabel id="employeeId" value="#{actorView.actor.id}" />
 
 
                 <p:outputLabel value="First Name" for="firstname"/>
-                <p:inputText id="firstname" value="#{actorView.employee.firstname}" />
+                <p:inputText id="firstname" value="#{actorView.actor.firstname}" />
 
                 <p:outputLabel value="Last Name" for="lastname"/>
-                <p:inputText id="lastname" value="#{actorView.employee.lastname}" />
-
+                <p:inputText id="lastname" value="#{actorView.actor.lastname}" />
+<!--
                 <p:outputLabel value="Birthdate" for="birthdate"/>
                 <p:calendar id="birthdate" value="#{actorView.employee.birthdate}" maxdate="#{actorView.today}" pattern="#{actorView.birthdatePattern}"/>
 
@@ -44,7 +44,7 @@
                 <p:calendar id="doj" value="#{actorView.employee.doj}" maxdate="#{actorView.today}" pattern="#{actorView.dojPattern}"/>
 
                 <p:commandButton value="Submit" update="growl" icon="ui-icon-check" actionListener="#{actorView.addEmployee}"/>
-
+-->
             </p:panelGrid>
         </h:form>
     </h:body>

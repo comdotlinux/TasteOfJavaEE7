@@ -1,5 +1,7 @@
 package com.linux.rhcloud.javaee.movieinfo.presentation;
 
+import com.linux.rhcloud.javaee.movieinfo.business.entity.Actor;
+import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import org.slf4j.Logger;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -11,6 +13,20 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Model
 public class ActorView {
      private static final Logger LOG = getLogger(ActorView.class);
+    
+     private Actor actor;
      
+     @PostConstruct
+     public void init(){
+         this.actor = new Actor();
+     }
+
+    public Actor getActor() {
+        return actor;
+    }
+
+    public void setActor(Actor actor) {
+        this.actor = actor;
+    }
      
 }
