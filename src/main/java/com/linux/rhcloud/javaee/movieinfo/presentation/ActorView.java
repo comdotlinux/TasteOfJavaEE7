@@ -28,5 +28,10 @@ public class ActorView {
     public void setActor(Actor actor) {
         this.actor = actor;
     }
+    
+    public Object addActor(){
+        LOG.info("Actor is {}",this.actor);
+        return null;
+    }
      
 }

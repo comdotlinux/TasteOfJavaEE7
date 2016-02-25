@@ -2,6 +2,7 @@ package com.linux.rhcloud.javaee.movieinfo.business.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.json.JsonObject;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +14,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * Actor Entity
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
 @Entity
@@ -37,6 +38,14 @@ public class Actor implements Serializable {
     @Column(name = "last_update")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdateDate;
+
+    public Actor(String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+
+    public Actor() {
+    }
 
     public long getId() {
         return id;
@@ -69,7 +78,10 @@ public class Actor implements Serializable {
     public void setLastUpdateDate(Date lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Actor{" + "id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", lastUpdateDate=" + lastUpdateDate + '}';
+    }
     
 }
