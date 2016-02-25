@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:head>
+            <title>Actor View</title>
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"></link>
+            <!-- Optional theme -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"></link>
+            <!-- Latest compiled and minified JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+            <h:outputStylesheet library="css" name="app.css"></h:outputStylesheet>
+        </h:head>
+    </h:head>
+    <h:body>
+        <p:growl id="growl" showDetail="true" sticky="true" life="2000"/>
+        <h:form>
+            <p:panelGrid columns="2">
+                <f:facet name="header">
+                    <p:graphicImage name="images/wildfly_desktop_1440x900.jpg" styleClass="img-scale img-thumbnail" alt="Wildfly Image"/>
+                </f:facet>
+
+
+                <p:outputLabel value="Employee ID" />
+                <p:outputLabel id="employeeId" value="#{actorView.employee.id}" />
+
+
+                <p:outputLabel value="First Name" for="firstname"/>
+                <p:inputText id="firstname" value="#{actorView.employee.firstname}" />
+
+                <p:outputLabel value="Last Name" for="lastname"/>
+                <p:inputText id="lastname" value="#{actorView.employee.lastname}" />
+
+                <p:outputLabel value="Birthdate" for="birthdate"/>
+                <p:calendar id="birthdate" value="#{actorView.employee.birthdate}" maxdate="#{actorView.today}" pattern="#{actorView.birthdatePattern}"/>
+
+                <p:outputLabel value="Gender" for="gender"/>
+                <p:selectOneRadio id="gender" value="#{actorView.employee.gender}">
+                    <f:selectItems value="#{actorView.genderOptions}" var="gender" itemValue="#{gender}" itemLabel="#{gender.fullform}"/>
+                </p:selectOneRadio>
+
+                <p:outputLabel value="Date of Joining" for="doj" />
+                <p:calendar id="doj" value="#{actorView.employee.doj}" maxdate="#{actorView.today}" pattern="#{actorView.dojPattern}"/>
+
+                <p:commandButton value="Submit" update="growl" icon="ui-icon-check" actionListener="#{actorView.addEmployee}"/>
+
+            </p:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+
