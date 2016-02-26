@@ -31,11 +31,89 @@
 
                 <p:outputLabel value="Last Name" for="lastname"/>
                 <p:inputText id="lastname" value="#{actorView.actor.lastname}" />
-                
+
                 <p:outputLabel id="lastUpdateDateLabel" value="Last Update Date"/>
                 <p:outputLabel id="lastUpdateDateValue" value="#{actorView.actor.lastUpdateDate}" />
                 <p:commandButton value="Submit" update="growl" icon="ui-icon-check" actionListener="#{actorView.addActor}"/>
             </p:panelGrid>
+        </h:form>
+        <p:spacer></p:spacer>
+        <h:form>
+            <p:dataTable id="actorsTable" var="actor" value="#{actorView.allActors}"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                         paginator="true" rows="20" style="margin-bottom:20px">
+
+                <f:facet name="{Exporters}">
+                    <h:commandLink>
+                        <p:graphicImage name="images/excel.png" width="24"/>
+                        <p:dataExporter type="xlsx" target="actorsTable" fileName="actors" />
+                    </h:commandLink>
+
+                    <h:commandLink>
+                        <p:graphicImage name="images/pdf.png" width="24"/>
+                        <p:dataExporter type="pdf" target="actorsTable" fileName="actors"/>
+                    </h:commandLink>
+
+                    <h:commandLink>
+                        <p:graphicImage name="images/csv.png" width="24"/>
+                        <p:dataExporter type="csv" target="actorsTable" fileName="actors" />
+                    </h:commandLink>
+
+                    <h:commandLink>
+                        <p:graphicImage name="images/xml.png" width="24"/>
+                        <p:dataExporter type="xml" target="actorsTable" fileName="actors" />
+                    </h:commandLink>
+                </f:facet>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Actor Number" />
+                    </f:facet>
+                    <h:outputText value="#{actor.id}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="First Name"/>
+                    </f:facet>
+                    <h:outputText value="#{actor.firstname}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Last Name" />
+                    </f:facet>
+                    <h:outputText value="#{actor.lastname}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Last Update Date" />
+                    </f:facet>
+                    <h:outputText value="#{actor.lastUpdateDate}" />
+                </p:column>
+            </p:dataTable>
+
+            <h3>Export Page Data Only</h3>
+            <h:commandLink>
+                <p:graphicImage name="images/excel.png" />
+                <p:dataExporter type="xls" target="actorsTable" fileName="actors" pageOnly="true"/>
+            </h:commandLink>
+
+            <h:commandLink>
+                <p:graphicImage name="images/pdf.png" />
+                <p:dataExporter type="pdf" target="actorsTable" fileName="actors" pageOnly="true" />
+            </h:commandLink>
+
+            <h:commandLink>
+                <p:graphicImage name="images/csv.png" />
+                <p:dataExporter type="csv" target="actorsTable" fileName="actors" pageOnly="true" />
+            </h:commandLink>
+
+            <h:commandLink>
+                <p:graphicImage name="images/xml.png" />
+                <p:dataExporter type="xml" target="actorsTable" fileName="actors" pageOnly="true" />
+            </h:commandLink>
         </h:form>
     </h:body>
 </html>
