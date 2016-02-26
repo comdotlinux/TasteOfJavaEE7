@@ -40,7 +40,7 @@ public class ActorView {
         return null;
     }
     
-    public List<Actor> allActors(){
+    public List<Actor> getActors(){
         return this.actorManager.all();
     }
      
