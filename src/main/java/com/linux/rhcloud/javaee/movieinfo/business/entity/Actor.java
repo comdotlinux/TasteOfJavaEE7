@@ -19,10 +19,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Actor Entity
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
-@Entity
+@Entity(name = "actor")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@NamedQueries(@NamedQuery(name = Actor.FIND_ALL_ACTORS, query = "SELECT a FROM Actor a"))
+@NamedQueries(@NamedQuery(name = Actor.FIND_ALL_ACTORS, query = "SELECT a FROM actor a"))
 public class Actor implements Serializable {
 
     private static final long serialVersionUID = -8357357239161127772L;
