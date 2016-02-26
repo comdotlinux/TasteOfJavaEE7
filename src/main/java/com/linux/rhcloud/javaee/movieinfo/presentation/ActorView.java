@@ -37,11 +37,14 @@ public class ActorView {
     
     public Object addActor(){
         LOG.info("Actor is {}",this.actor);
+        this.actorManager.add(this.actor);
         return null;
     }
     
     public List<Actor> getActors(){
-        return this.actorManager.all();
+        final List<Actor> allActors = this.actorManager.all();
+        LOG.info("{} Actors retrieved.", allActors.size());
+        return allActors;
     }
      
 }
