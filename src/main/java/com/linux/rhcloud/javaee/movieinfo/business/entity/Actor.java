@@ -2,7 +2,6 @@ package com.linux.rhcloud.javaee.movieinfo.business.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.json.JsonObject;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +11,9 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 /**
  * Actor Entity
@@ -79,9 +81,13 @@ public class Actor implements Serializable {
         this.lastUpdateDate = lastUpdateDate;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "Actor{" + "id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", lastUpdateDate=" + lastUpdateDate + '}';
+        return new ToStringBuilder(this, SHORT_PREFIX_STYLE).append(id).append(firstname).append(lastname).append(lastUpdateDate).toString();
     }
+
     
 }
