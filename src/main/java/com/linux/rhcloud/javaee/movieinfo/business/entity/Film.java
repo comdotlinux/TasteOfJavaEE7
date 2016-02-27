@@ -8,10 +8,13 @@ package com.linux.rhcloud.javaee.movieinfo.business.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -33,38 +36,145 @@ public class Film implements Serializable {
 @Column(name = "title")
 private String title;
 
-
 @Column(name = "description")
 private String description;
 
 @Column(name = "release_year")
-private String releaseYear;
+@Temporal(TemporalType.DATE)
+private Date releaseYear;
 
 @Column(name = "language_id")
-private String languageId;
+private long languageId;
 
 @Column(name = "original_language_id")
-private String originalLanguageId;
+private long originalLanguageId;
 
 @Column(name = "rental_duration")
-private String rentalDuration;
+private int rentalDuration;
 
 @Column(name = "rental_rate")
 private BigDecimal rentalRate;
 
-@Column(name = "length")
+@Column(name = "length_of_film")
 private int lengthOfFilm;
 
 @Column(name = "replacement_cost")
 private BigDecimal replacementConst;
 
 @Column(name = "rating")
-private String rating;
+private Rating rating;
 
 @Column(name = "special_features")
-private String specialFeatures;
+private Set<String> specialFeatures;
 
 @Column(name = "last_update")
+@Temporal(TemporalType.TIMESTAMP)
 private Date lastUpdate;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getReleaseYear() {
+        return releaseYear;
+    }
+
+    public void setReleaseYear(Date releaseYear) {
+        this.releaseYear = releaseYear;
+    }
+
+    public long getLanguageId() {
+        return languageId;
+    }
+
+    public void setLanguageId(long languageId) {
+        this.languageId = languageId;
+    }
+
+    public long getOriginalLanguageId() {
+        return originalLanguageId;
+    }
+
+    public void setOriginalLanguageId(long originalLanguageId) {
+        this.originalLanguageId = originalLanguageId;
+    }
+
+    public int getRentalDuration() {
+        return rentalDuration;
+    }
+
+    public void setRentalDuration(int rentalDuration) {
+        this.rentalDuration = rentalDuration;
+    }
+
+    public BigDecimal getRentalRate() {
+        return rentalRate;
+    }
+
+    public void setRentalRate(BigDecimal rentalRate) {
+        this.rentalRate = rentalRate;
+    }
+
+    public int getLengthOfFilm() {
+        return lengthOfFilm;
+    }
+
+    public void setLengthOfFilm(int lengthOfFilm) {
+        this.lengthOfFilm = lengthOfFilm;
+    }
+
+    public BigDecimal getReplacementConst() {
+        return replacementConst;
+    }
+
+    public void setReplacementConst(BigDecimal replacementConst) {
+        this.replacementConst = replacementConst;
+    }
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
+    }
+
+    public Set<String> getSpecialFeatures() {
+        return specialFeatures;
+    }
+
+    public void setSpecialFeatures(Set<String> specialFeatures) {
+        this.specialFeatures = specialFeatures;
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+
     
 }

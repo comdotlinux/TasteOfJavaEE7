@@ -95,6 +95,5 @@ public class Actor implements Serializable {
     public String toString() {
         return new ToStringBuilder(this, SHORT_PREFIX_STYLE).append(id).append(firstname).append(lastname).append(lastUpdateDate).toString();
     }
-
     
 }
