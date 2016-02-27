@@ -28,7 +28,7 @@ public class Actor implements Serializable {
 
     private static final long serialVersionUID = -8357357239161127772L;
     
-    private static final String PREFIX = "movieinfo.business.entity.Actor.";
+    private static final String PREFIX = "movieinfo.business.entity.actor.";
     
     /** Named Query :: {@value #FIND_ALL_ACTORS}  to get all actors */
     public static final String FIND_ALL_ACTORS = PREFIX + "findAll";

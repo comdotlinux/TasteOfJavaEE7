@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.linux.rhcloud.javaee.movieinfo.business.entity;
 
 import java.io.Serializable;
@@ -13,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -26,50 +23,57 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity(name = "film")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+@NamedQueries(@NamedQuery(name = Film.FIND_ALL_FILMS,query =  "SELECT f from film f"))
 public class Film implements Serializable {
+
+    private static final String PREFIX = "movieinfo.business.entity.film.";
+    
+    /** Named Query :: {@value #FIND_ALL_FILMS}  to get all films */
+    public static final String FIND_ALL_FILMS = PREFIX + "findAll";
+    
     
     @Id
     @GeneratedValue
     @Column(name = "film_id")
     private long id;
-    
-@Column(name = "title")
-private String title;
 
-@Column(name = "description")
-private String description;
+    @Column(name = "title")
+    private String title;
 
-@Column(name = "release_year")
-@Temporal(TemporalType.DATE)
-private Date releaseYear;
+    @Column(name = "description")
+    private String description;
 
-@Column(name = "language_id")
-private long languageId;
+    @Column(name = "release_year")
+    @Temporal(TemporalType.DATE)
+    private Date releaseYear;
 
-@Column(name = "original_language_id")
-private long originalLanguageId;
+    @Column(name = "language_id")
+    private long languageId;
 
-@Column(name = "rental_duration")
-private int rentalDuration;
+    @Column(name = "original_language_id")
+    private long originalLanguageId;
 
-@Column(name = "rental_rate")
-private BigDecimal rentalRate;
+    @Column(name = "rental_duration")
+    private int rentalDuration;
 
-@Column(name = "length_of_film")
-private int lengthOfFilm;
+    @Column(name = "rental_rate")
+    private BigDecimal rentalRate;
 
-@Column(name = "replacement_cost")
-private BigDecimal replacementConst;
+    @Column(name = "length_of_film")
+    private int lengthOfFilm;
 
-@Column(name = "rating")
-private Rating rating;
+    @Column(name = "replacement_cost")
+    private BigDecimal replacementConst;
 
-@Column(name = "special_features")
-private Set<String> specialFeatures;
+    @Column(name = "rating")
+    private Rating rating;
 
-@Column(name = "last_update")
-@Temporal(TemporalType.TIMESTAMP)
-private Date lastUpdate;
+    @Column(name = "special_features")
+    private Set<String> specialFeatures;
+
+    @Column(name = "last_update")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastUpdate;
 
     public long getId() {
         return id;
@@ -175,6 +179,4 @@ private Date lastUpdate;
         this.lastUpdate = lastUpdate;
     }
 
-
-    
 }
