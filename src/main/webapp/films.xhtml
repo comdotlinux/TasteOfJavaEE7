@@ -15,7 +15,7 @@
     </h:head>
     <h:body>
         <h:form> 
-            <p:dataScroller value="#{filmView.films}" var="car" chunkSize="10">
+            <p:dataScroller value="#{filmView.allFilms}" var="film" chunkSize="50">
                 <f:facet name="header">
                     Scroll Down to Load More Cars
                 </f:facet>
