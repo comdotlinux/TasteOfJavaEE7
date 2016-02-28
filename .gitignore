@@ -18,3 +18,5 @@ hs_err_pid*
 
 */target/**
 /target/
+/src/main/webapp/welcomePrimefaces.xhtml
+/src/main/webapp/WEB-INF/jboss-web.xml
