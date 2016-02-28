@@ -13,41 +13,43 @@
     </h:head>
     <h:body>
         <h3>Basic</h3>
-       <!--
-        <p:growl id="growl" showDetail="true" sticky="true" life="2000"/>
-        <h:form>
-            <p:panelGrid columns="2">
-                <f:facet name="header">
-                    <p:graphicImage name="images/wildfly_desktop_1440x900.jpg" styleClass="img-scale img-thumbnail" alt="Wildfly Image"/>
-                </f:facet>
-
-
-                <p:outputLabel value="Employee ID" />
-                <p:outputLabel id="employeeId" value="#{index.employee.id}" />
-
-
-                <p:outputLabel value="First Name" for="firstname"/>
-                <p:inputText id="firstname" value="#{index.employee.firstname}" />
-
-                <p:outputLabel value="Last Name" for="lastname"/>
-                <p:inputText id="lastname" value="#{index.employee.lastname}" />
-
-                <p:outputLabel value="Birthdate" for="birthdate"/>
-                <p:calendar id="birthdate" value="#{index.employee.birthdate}" maxdate="#{index.today}" pattern="#{index.birthdatePattern}"/>
-
-                <p:outputLabel value="Gender" for="gender"/>
-                <p:selectOneRadio id="gender" value="#{index.employee.gender}">
-                    <f:selectItems value="#{index.genderOptions}" var="gender" itemValue="#{gender}" itemLabel="#{gender.fullform}"/>
-                </p:selectOneRadio>
-
-                <p:outputLabel value="Date of Joining" for="doj" />
-                <p:calendar id="doj" value="#{index.employee.doj}" maxdate="#{index.today}" pattern="#{index.dojPattern}"/>
-
-                <p:commandButton value="Submit" update="growl" icon="ui-icon-check" actionListener="#{index.addEmployee}"/>
-
-            </p:panelGrid>
-        </h:form>
-       -->
+        <!--
+         <p:growl id="growl" showDetail="true" sticky="true" life="2000"/>
+         <h:form>
+             <p:panelGrid columns="2">
+                 <f:facet name="header">
+                     <p:graphicImage name="images/wildfly_desktop_1440x900.jpg" styleClass="img-scale img-thumbnail" alt="Wildfly Image"/>
+                 </f:facet>
+ 
+ 
+                 <p:outputLabel value="Employee ID" />
+                 <p:outputLabel id="employeeId" value="#{index.employee.id}" />
+ 
+ 
+                 <p:outputLabel value="First Name" for="firstname"/>
+                 <p:inputText id="firstname" value="#{index.employee.firstname}" />
+ 
+                 <p:outputLabel value="Last Name" for="lastname"/>
+                 <p:inputText id="lastname" value="#{index.employee.lastname}" />
+ 
+                 <p:outputLabel value="Birthdate" for="birthdate"/>
+                 <p:calendar id="birthdate" value="#{index.employee.birthdate}" maxdate="#{index.today}" pattern="#{index.birthdatePattern}"/>
+ 
+                 <p:outputLabel value="Gender" for="gender"/>
+                 <p:selectOneRadio id="gender" value="#{index.employee.gender}">
+                     <f:selectItems value="#{index.genderOptions}" var="gender" itemValue="#{gender}" itemLabel="#{gender.fullform}"/>
+                 </p:selectOneRadio>
+ 
+                 <p:outputLabel value="Date of Joining" for="doj" />
+                 <p:calendar id="doj" value="#{index.employee.doj}" maxdate="#{index.today}" pattern="#{index.dojPattern}"/>
+ 
+                 <p:commandButton value="Submit" update="growl" icon="ui-icon-check" actionListener="#{index.addEmployee}"/>
+ 
+             </p:panelGrid>
+         </h:form>
+        -->
+        <br />
+        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
     </h:body>
 </html>
 

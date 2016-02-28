@@ -59,7 +59,7 @@ public class Film implements Serializable {
     @Column(name = "rental_rate")
     private BigDecimal rentalRate;
 
-    @Column(name = "length_of_film")
+    @Column(name = "length")
     private int lengthOfFilm;
 
     @Column(name = "replacement_cost")
