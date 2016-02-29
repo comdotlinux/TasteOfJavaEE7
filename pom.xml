@@ -92,6 +92,11 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    
+    
+    <build>
+        <finalName>javaee7app</finalName>
+    </build>
 
     <profiles>
         <profile>

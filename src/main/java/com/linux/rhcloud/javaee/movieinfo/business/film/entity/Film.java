@@ -3,7 +3,6 @@ package com.linux.rhcloud.javaee.movieinfo.business.film.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -67,9 +66,6 @@ public class Film implements Serializable {
 
     @Column(name = "rating")
     private Rating rating;
-
-    @Column(name = "special_features")
-    private Set<String> specialFeatures;
 
     @Column(name = "last_update")
     @Temporal(TemporalType.TIMESTAMP)
@@ -161,14 +157,6 @@ public class Film implements Serializable {
 
     public void setRating(Rating rating) {
         this.rating = rating;
-    }
-
-    public Set<String> getSpecialFeatures() {
-        return specialFeatures;
-    }
-
-    public void setSpecialFeatures(Set<String> specialFeatures) {
-        this.specialFeatures = specialFeatures;
     }
 
     public Date getLastUpdate() {
