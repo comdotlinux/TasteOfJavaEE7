@@ -13,42 +13,32 @@
             <h:outputStylesheet library="css" name="app.css"></h:outputStylesheet>
     </h:head>
     <h:body>
-        <h:form> 
             <p:dataScroller value="#{filmView.allFilms}" var="film" chunkSize="50">
                 <f:facet name="header">
                     <h:outputText value="Infinite scrolling." />
                 </f:facet>
                 <p:outputPanel>
-                    <h:panelGrid columns="18" cellpadding="5">
+                    <h:panelGrid columns="9" cellpadding="5">
                         
-                        <h:outputText value="Id:" />
                         <h:outputText value="#{film.id}" />
 
-                        <h:outputText value="Title:" />
                         <h:outputText value="#{film.title}" />
 
-                        <h:outputText value="Description:" />
                         <h:outputText value="#{film.description}"/>
 
-                        <h:outputText value="Release Year:" />
                         <h:outputText value="#{film.releaseYear}"/>
                         
-                        <h:outputText value=":" />
                         <h:outputText value="#{film.languageId}"/>
                         
-                        <h:outputText value=":" />
                         <h:outputText value="#{film.originalLanguageId}"/>
 
-                        <h:outputText value=":" />
                         <h:outputText value="#{film.rating}"/>
                         
-                        <h:outputText value=":" />
                         <h:outputText value="#{film.lengthOfFilm}"/>
                         
-                        <h:outputText value=":" />
                         <h:outputText value="#{film.rentalRate}"/>
                     </h:panelGrid>
                 </p:outputPanel>
             </p:dataScroller>
-        </h:form>
     </h:body>
+</html>

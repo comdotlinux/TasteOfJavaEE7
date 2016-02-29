@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -65,6 +67,7 @@ public class Film implements Serializable {
     private BigDecimal replacementConst;
 
     @Column(name = "rating")
+    @Enumerated(EnumType.STRING)
     private Rating rating;
 
     @Column(name = "last_update")
