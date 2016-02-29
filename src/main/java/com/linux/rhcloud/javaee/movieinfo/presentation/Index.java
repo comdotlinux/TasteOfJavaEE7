@@ -1,4 +1,4 @@
-package com.linux.rhcloud.javaee.presentation;
+package com.linux.rhcloud.javaee.movieinfo.presentation;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

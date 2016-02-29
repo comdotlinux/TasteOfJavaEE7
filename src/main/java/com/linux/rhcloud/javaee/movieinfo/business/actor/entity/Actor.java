@@ -1,4 +1,4 @@
-package com.linux.rhcloud.javaee.movieinfo.business.entity;
+package com.linux.rhcloud.javaee.movieinfo.business.actor.entity;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,6 +1,6 @@
-package com.linux.rhcloud.javaee.movieinfo.business.boundry;
+package com.linux.rhcloud.javaee.movieinfo.business.actor.boundry;
 
-import com.linux.rhcloud.javaee.movieinfo.business.entity.Actor;
+import com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor;
 import com.linux.rhcloud.javaee.movieinfo.presentation.ActorView;
 import java.util.List;
 import javax.ejb.Stateless;

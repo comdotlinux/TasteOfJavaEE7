@@ -1,4 +1,4 @@
-package com.linux.rhcloud.javaee.movieinfo.business.entity;
+package com.linux.rhcloud.javaee.movieinfo.business.film.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

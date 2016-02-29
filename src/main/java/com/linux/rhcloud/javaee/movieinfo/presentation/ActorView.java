@@ -1,7 +1,7 @@
 package com.linux.rhcloud.javaee.movieinfo.presentation;
 
-import com.linux.rhcloud.javaee.movieinfo.business.boundry.ActorManager;
-import com.linux.rhcloud.javaee.movieinfo.business.entity.Actor;
+import com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.ActorManager;
+import com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;

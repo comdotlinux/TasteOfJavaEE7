@@ -1,6 +1,6 @@
-package com.linux.rhcloud.javaee.movieinfo.business.boundry;
+package com.linux.rhcloud.javaee.movieinfo.business.film.boundry;
 
-import com.linux.rhcloud.javaee.movieinfo.business.entity.Film;
+import com.linux.rhcloud.javaee.movieinfo.business.film.entity.Film;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
