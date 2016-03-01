@@ -15,8 +15,7 @@
     </h:head>
     <h:body>
         <h:form>
-        <p:growl id="growl" showDetail="true" sticky="true" life="2000"/>
-            <p:panelGrid columns="2">
+            <p:panelGrid columns="3">
                 <f:facet name="header">
                     <p:graphicImage name="images/wildfly_desktop_1440x900.jpg" styleClass="img-scale img-thumbnail" alt="Wildfly Image"/>
                 </f:facet>
@@ -24,17 +23,23 @@
 
                 <p:outputLabel value="Actor" for="actorId"/>
                 <p:outputLabel id="actorId" value="#{actorView.actor.id}" />
+                <p:outputLabel value=""/>
 
 
                 <p:outputLabel value="First Name" for="firstname"/>
                 <p:inputText id="firstname" value="#{actorView.actor.firstname}" />
+                <p:growl id="firstnameGrowl" showDetail="true" sticky="false" life="1000" for="firstname"/>
 
                 <p:outputLabel value="Last Name" for="lastname"/>
                 <p:inputText id="lastname" value="#{actorView.actor.lastname}" />
+                <p:growl id="lastnameGrowl" showDetail="true" sticky="false" life="1000" for="lastname"/>
 
                 <p:outputLabel id="lastUpdateDateLabel" value="Last Update Date"/>
                 <p:outputLabel id="lastUpdateDateValue" value="#{actorView.actor.lastUpdateDate}" />
-                <p:commandButton value="Submit" update="growl" icon="ui-icon-check" actionListener="#{actorView.addActor}"/>
+                <p:outputLabel value=""/>
+                
+                <p:outputLabel value=""/>
+                <p:commandButton value="Submit" update="firstnameGrowl lastnameGrowl" icon="ui-icon-check" actionListener="#{actorView.addActor}"/>
             </p:panelGrid>
         </h:form>
         <p:spacer></p:spacer>
