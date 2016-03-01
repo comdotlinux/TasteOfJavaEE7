@@ -3,6 +3,7 @@ package com.linux.rhcloud.javaee.movieinfo.business.actor.boundry;
 import com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.enterprise.event.Event;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
@@ -17,6 +18,8 @@ public class ActorManager {
 
     private static final Logger LOG = getLogger(ActorManager.class);
     
+    private Event<Actor> actorSaveEvent;
+    
     @PersistenceContext
     private EntityManager em;
     
@@ -27,6 +30,7 @@ public class ActorManager {
 
     public void add(Actor actor) {
         LOG.info("Persisting {}", actor);
+        actorSaveEvent.fire(actor);
         em.persist(actor);
     }
     

@@ -1,5 +1,7 @@
 package com.linux.rhcloud.javaee.movieinfo.business.actor.entity;
 
+import com.linux.rhcloud.javaee.movieinfo.crosscutting.entityvalidation.CrossFieldCheck;
+import com.linux.rhcloud.javaee.movieinfo.crosscutting.entityvalidation.CrossFieldEntityValidator;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -12,9 +14,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
@@ -26,7 +30,8 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries(@NamedQuery(name = Actor.FIND_ALL_ACTORS, query = "SELECT a FROM actor a"))
-public class Actor implements Serializable {
+@CrossFieldCheck(message = "If Actor firstname is 3 characters then lastname must be greater than 3 characters.")
+public class Actor implements Serializable, CrossFieldEntityValidator {
 
     private static final long serialVersionUID = -8357357239161127772L;
     
@@ -41,9 +46,11 @@ public class Actor implements Serializable {
     private long id;
     
     @Column(name = "first_name")
+    @Size(min = 3, max = 45)
     private String firstname;
     
     @Column(name = "last_name")
+    @Size(min = 3, max = 45)
     private String lastname;
     
     @Column(name = "last_update")
@@ -96,6 +103,11 @@ public class Actor implements Serializable {
     @Override
     public String toString() {
         return new ToStringBuilder(this, SHORT_PREFIX_STYLE).append(id).append(firstname).append(lastname).append(lastUpdateDate).toString();
+    }
+
+    @Override
+    public boolean isValid() {
+        return StringUtils.length(firstname) >= 4 || StringUtils.length(lastname) > 3;
     }
     
 }
