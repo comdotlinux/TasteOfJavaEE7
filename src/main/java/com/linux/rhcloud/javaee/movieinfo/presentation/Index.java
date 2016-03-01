@@ -14,4 +14,7 @@ public class Index {
 
     private static final Logger LOG = getLogger(Index.class);
 
+    public String getActorView(){
+        return "actorView";
+    }
 }
