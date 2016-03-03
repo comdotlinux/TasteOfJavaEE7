@@ -14,6 +14,7 @@
         </h:head>
     </h:head>
     <h:body>
+        <p:growl id="genericMessage" autoUpdate="true" life="5000"/>
         <h:form>
             <p:panelGrid columns="3">
                 <f:facet name="header">
@@ -28,18 +29,18 @@
 
                 <p:outputLabel value="First Name" for="firstname"/>
                 <p:inputText id="firstname" value="#{actorView.actor.firstname}" />
-                <h:message id="firstnameGrowl" for="firstname"/>
+                <h:message id="firstnameMessage" for="firstname"/>
 
                 <p:outputLabel value="Last Name" for="lastname"/>
                 <p:inputText id="lastname" value="#{actorView.actor.lastname}" />
-                <h:message id="lastnameGrowl" for="lastname"/>
+                <h:message id="lastnameMessage" for="lastname"/>
 
                 <p:outputLabel id="lastUpdateDateLabel" value="Last Update Date"/>
                 <p:outputLabel id="lastUpdateDateValue" value="#{actorView.actor.lastUpdateDate}" />
                 <p:outputLabel value=""/>
                 
                 <p:outputLabel value=""/>
-                <p:commandButton value="Submit" update="firstnameGrowl lastnameGrowl" icon="ui-icon-check" actionListener="#{actorView.addActor}"/>
+                <p:commandButton value="Submit" update="firstnameMessage lastnameMessage" icon="ui-icon-check" actionListener="#{actorView.addActor}"/>
             </p:panelGrid>
         </h:form>
         <p:spacer></p:spacer>
