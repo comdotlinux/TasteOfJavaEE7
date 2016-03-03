@@ -28,11 +28,11 @@
 
                 <p:outputLabel value="First Name" for="firstname"/>
                 <p:inputText id="firstname" value="#{actorView.actor.firstname}" />
-                <p:growl id="firstnameGrowl" showDetail="true" sticky="false" life="1000" for="firstname"/>
+                <h:message id="firstnameGrowl" for="firstname"/>
 
                 <p:outputLabel value="Last Name" for="lastname"/>
                 <p:inputText id="lastname" value="#{actorView.actor.lastname}" />
-                <p:growl id="lastnameGrowl" showDetail="true" sticky="false" life="1000" for="lastname"/>
+                <h:message id="lastnameGrowl" for="lastname"/>
 
                 <p:outputLabel id="lastUpdateDateLabel" value="Last Update Date"/>
                 <p:outputLabel id="lastUpdateDateValue" value="#{actorView.actor.lastUpdateDate}" />
@@ -102,22 +102,22 @@
             <h3>Export Page Data Only</h3>
             <h:commandLink>
                 <p:graphicImage name="images/excel.png" />
-                <p:dataExporter type="xls" target="actorsTable" fileName="actors" pageOnly="true"/>
+                <p:dataExporter type="xls" target="actorsTable" fileName="actorsCurrentPage" pageOnly="true"/>
             </h:commandLink>
 
             <h:commandLink>
                 <p:graphicImage name="images/pdf.png" />
-                <p:dataExporter type="pdf" target="actorsTable" fileName="actors" pageOnly="true" />
+                <p:dataExporter type="pdf" target="actorsTable" fileName="actorsCurrentPage" pageOnly="true" />
             </h:commandLink>
 
             <h:commandLink>
                 <p:graphicImage name="images/csv.png" />
-                <p:dataExporter type="csv" target="actorsTable" fileName="actors" pageOnly="true" />
+                <p:dataExporter type="csv" target="actorsTable" fileName="actorsCurrentPage" pageOnly="true" />
             </h:commandLink>
 
             <h:commandLink>
                 <p:graphicImage name="images/xml.png" />
-                <p:dataExporter type="xml" target="actorsTable" fileName="actors" pageOnly="true" />
+                <p:dataExporter type="xml" target="actorsTable" fileName="actorsCurrentPage" pageOnly="true" />
             </h:commandLink>
         </h:form>
     </h:body>
