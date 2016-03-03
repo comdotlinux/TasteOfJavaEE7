@@ -4,6 +4,7 @@ import com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ public class ActorManager {
 
     private static final Logger LOG = getLogger(ActorManager.class);
     
+    @Inject
     private Event<Actor> actorSaveEvent;
     
     @PersistenceContext
