@@ -25,6 +25,8 @@ public class ActorView {
 
     @Inject
     private ActorManager actorManager;
+    
+    
 
     @PostConstruct
     public void init() {
