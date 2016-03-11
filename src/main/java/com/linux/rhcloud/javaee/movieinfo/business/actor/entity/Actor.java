@@ -24,36 +24,52 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 /**
  * Actor Entity
+ *
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
 @Entity(name = "actor")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@NamedQueries(@NamedQuery(name = Actor.FIND_ALL_ACTORS, query = "SELECT a FROM actor a"))
+@NamedQueries(
+        @NamedQuery(name = Actor.FIND_ALL_ACTORS, query = "SELECT a FROM actor a"))
 @CrossFieldCheck(message = "If Actor firstname is 3 characters then lastname must be greater than 3 characters.")
 public class Actor implements Serializable, CrossFieldEntityValidator {
 
     private static final long serialVersionUID = -8357357239161127772L;
-    
+
     private static final String PREFIX = "movieinfo.business.entity.actor.";
-    
-    /** Named Query :: {@value #FIND_ALL_ACTORS}  to get all actors */
+
+    /**
+     * Named Query :: {@value #FIND_ALL_ACTORS} to get all actors
+     */
     public static final String FIND_ALL_ACTORS = PREFIX + "findAll";
+
+    /** The column name of Actor id: {@value #ID} */
+    public static final String ID = "actor_id";
+    
+    /** The column name of Actor first name: {@value #FIRST_NAME} */
+    public static final String FIRST_NAME = "first_name";
+    
+    /** The column name of Actor last name: {@value #LAST_NAME} */
+    public static final String LAST_NAME = "last_name";
+    
+    /** The column name of Actor last update: {@value #LAST_UPDATE} */
+    public static final String LAST_UPDATE = "last_update";
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "actor_id")
+    @Column(name = ID)
     private long id;
-    
-    @Column(name = "first_name")
+
+    @Column(name = FIRST_NAME)
     @Size(min = 3, max = 45)
     private String firstname;
-    
-    @Column(name = "last_name")
+
+    @Column(name = LAST_NAME)
     @Size(min = 3, max = 45)
     private String lastname;
-    
-    @Column(name = "last_update")
+
+    @Column(name = LAST_UPDATE)
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdateDate;
 
@@ -109,5 +125,5 @@ public class Actor implements Serializable, CrossFieldEntityValidator {
     public boolean isValid() {
         return StringUtils.length(firstname) >= 4 || StringUtils.length(lastname) > 3;
     }
-    
+
 }
