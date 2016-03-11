@@ -5,6 +5,7 @@
  */
 package com.linux.rhcloud.javaee.movieinfo.business.actor.boundry;
 
+import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.ActorResource.ACTORS_PATH;
 import com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor;
 import static com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor.ID;
 import java.math.BigDecimal;
@@ -24,8 +25,11 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
  *
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
-@Path("actors")
+@Path(ACTORS_PATH)
 public class ActorResource {
+    
+    /** The Path for {@linkplain ActorResource}. The value is {@value #ACTORS_PATH}*/
+    public static final String ACTORS_PATH = "actors";
 
     @Inject
     ActorManager manager;
