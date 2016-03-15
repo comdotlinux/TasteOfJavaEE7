@@ -9,7 +9,6 @@ import com.airhacks.rulz.jaxrsclient.HttpMatchers;
 import com.airhacks.rulz.jaxrsclient.JAXRSClientProvider;
 import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.ActorResource.ACTORS_PATH;
 import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.JAXRSConfiguration.JAXRS_BASE;
-<<<<<<< HEAD
 import java.util.ResourceBundle;
 import javax.ws.rs.client.Entity;
 import javax.json.Json;
@@ -21,7 +20,6 @@ import javax.ws.rs.core.Response;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
->>>>>>> origin/master
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.junit.Assume.assumeThat;
