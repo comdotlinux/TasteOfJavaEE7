@@ -5,19 +5,26 @@
  */
 package com.rhcloud.javaee.movieinfo.business.actor.boundry;
 
+import com.airhacks.rulz.jaxrsclient.HttpMatchers;
 import com.airhacks.rulz.jaxrsclient.JAXRSClientProvider;
 import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.ActorResource.ACTORS_PATH;
 import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.JAXRSConfiguration.JAXRS_BASE;
+<<<<<<< HEAD
 import java.util.ResourceBundle;
+import javax.ws.rs.client.Entity;
 import javax.json.Json;
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
-import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
+>>>>>>> origin/master
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.junit.Assume.assumeThat;
 import org.junit.Rule;
 
 /**
@@ -25,7 +32,7 @@ import org.junit.Rule;
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
 public class ActorResourceIT {
-    
+
     private static final String SERVER_URL;
     
     static {
@@ -51,7 +58,6 @@ public class ActorResourceIT {
          
     }
     
-    
      @Test
      public void CrudForActorIntegrationTest() {
         final String fn = "Matt";
@@ -60,5 +66,30 @@ public class ActorResourceIT {
         Response postResponse = provider.target().request().post(Entity.json(createActor(fn, ln)));
         String location = postResponse.getHeaderString("Location");
         assertThat(location, is(notNullValue()));
+     }
+
+     @Test
+     public void getAllActors() {
+         
+        Response getResponse = null;
+        
+        try{
+                getResponse = provider.target().request(MediaType.APPLICATION_JSON).get();
+        } finally {
+            assumeThat(getResponse,is(notNullValue()));
+        }
+
+        
+        assertThat(getResponse, is(HttpMatchers.successful()));
+        assertThat(getResponse.hasEntity(), is(true));
+        
+        JsonArray payload = getResponse.readEntity(JsonArray.class);
+        assertThat(payload, is(notNullValue()));
+        final int size = payload.size();
+        assertThat(size, is(not(0)));
+        
+        JsonObject value = payload.getJsonObject(size - 1);
+        assertThat(value, is(notNullValue()));
+        assertThat(value.getInt("id"), is(size));
      }
 }

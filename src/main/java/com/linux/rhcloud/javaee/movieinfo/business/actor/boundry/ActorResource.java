@@ -12,7 +12,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.GET;
-import static javax.ws.rs.HttpMethod.POST;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -64,4 +63,5 @@ public class ActorResource {
         LOG.info("Created URI for location header is {}", location);
         return Response.created(location).build();
     }
+
 }
