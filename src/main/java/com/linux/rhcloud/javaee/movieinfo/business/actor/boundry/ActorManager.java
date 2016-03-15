@@ -27,13 +27,18 @@ public class ActorManager {
     
     public List<Actor> all() {
         LOG.info("Running named Query {} on {}", Actor.FIND_ALL_ACTORS, Actor.class.getSimpleName());
-        return em.createNamedQuery(Actor.FIND_ALL_ACTORS, Actor.class).getResultList();
+        return this.em.createNamedQuery(Actor.FIND_ALL_ACTORS, Actor.class).getResultList();
     }
 
-    public void add(Actor actor) {
+    /**
+     * Create or update Actor
+     * @param actor the actor to create or merge
+     * @return newly cleated actor.
+     */
+    public Actor save(Actor actor) {
         LOG.info("Persisting {}", actor);
-        actorSaveEvent.fire(actor);
-        em.persist(actor);
+        this.actorSaveEvent.fire(actor);
+        return this.em.merge(actor);
     }
     
 }

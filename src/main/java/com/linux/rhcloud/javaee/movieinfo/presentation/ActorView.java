@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.slf4j.Logger;
 import static org.slf4j.LoggerFactory.getLogger;
+import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * Backing bean for ActorView.xhtml
@@ -45,7 +46,7 @@ public class ActorView {
         LOG.info("Adding Actor {}", this.actor);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cross Field Validation Failed", "Cross Field Validation Failed");
         FacesContext.getCurrentInstance().addMessage(null, message);
-        this.actorManager.add(this.actor);
+        this.actorManager.save(this.actor);
         return null;
     }
 
