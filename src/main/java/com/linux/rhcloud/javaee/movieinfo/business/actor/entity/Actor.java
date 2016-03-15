@@ -30,8 +30,7 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 @Entity(name = "actor")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@NamedQueries(
-        @NamedQuery(name = Actor.FIND_ALL_ACTORS, query = "SELECT a FROM actor a"))
+@NamedQueries(@NamedQuery(name = Actor.FIND_ALL_ACTORS, query = "SELECT a FROM actor a"))
 @CrossFieldCheck(message = "If Actor firstname is 3 characters then lastname must be greater than 3 characters.")
 public class Actor implements Serializable, CrossFieldEntityValidator {
 

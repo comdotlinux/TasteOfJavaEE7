@@ -9,10 +9,13 @@ import com.airhacks.rulz.jaxrsclient.JAXRSClientProvider;
 import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.ActorResource.ACTORS_PATH;
 import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.JAXRSConfiguration.JAXRS_BASE;
 import java.util.ResourceBundle;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.Response;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Rule;
@@ -35,14 +38,27 @@ public class ActorResourceIT {
         }
     }
     
-    private static final String URI = JAXRS_BASE + "/" + ACTORS_PATH;
+    private static final String URI = SERVER_URL + "/" + JAXRS_BASE + "/" + ACTORS_PATH;
     
     @Rule
     public JAXRSClientProvider provider = JAXRSClientProvider.buildWithURI(URI);
     
+    private  JsonObject createActor(String firstname, String lastname){
+         JsonObjectBuilder actorBuilder = Json.createObjectBuilder()
+                 .add("firstname", firstname)
+                 .add("lastname", lastname);
+         return actorBuilder.build();
+         
+    }
+    
     
      @Test
      public void CrudForActorIntegrationTest() {
+        final String fn = "Matt";
+        final String ln = "Daemon";
          
+        Response postResponse = provider.target().request().post(Entity.json(createActor(fn, ln)));
+        String location = postResponse.getHeaderString("Location");
+        assertThat(location, is(notNullValue()));
      }
 }
