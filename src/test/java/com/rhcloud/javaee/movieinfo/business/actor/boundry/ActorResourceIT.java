@@ -5,10 +5,9 @@
  */
 package com.rhcloud.javaee.movieinfo.business.actor.boundry;
 
-import com.airhacks.rulz.jaxrsclient.HttpMatchers;
 import static com.airhacks.rulz.jaxrsclient.HttpMatchers.successful;
 import com.airhacks.rulz.jaxrsclient.JAXRSClientProvider;
-import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.ActorResource.ACTORS_PATH;
+import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.ActorsResource.ACTORS_PATH;
 import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.JAXRSConfiguration.JAXRS_BASE;
 import java.util.ResourceBundle;
 import javax.ws.rs.client.Entity;
@@ -16,7 +15,6 @@ import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
-import javax.ws.rs.core.MediaType;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -66,18 +64,20 @@ public class ActorResourceIT {
         final String fn = "Matt";
         final String ln = "Daemon";
          
-        Response postResponse = provider.target().path("/" + ACTORS_PATH).request().post(Entity.json(createActor(fn, ln)));
+        Response postResponse = provider.target().path("/" + ACTORS_PATH).request(APPLICATION_JSON).post(Entity.json(createActor(fn, ln)));
         assertThat(postResponse,is(successful()));
         
         String location = postResponse.getHeaderString("Location");
         assertThat(location, is(notNullValue()));
+        System.out.println("ActorResourceIT.CrudForActorIntegrationTest() " + location);
         
         Response actorResponse = provider.target(location).request(APPLICATION_JSON).get();
-         assertThat(actorResponse, is(successful()));
+        assertThat(actorResponse, is(successful()));
          
         JsonObject actor = actorResponse.readEntity(JsonObject.class);
         assertThat(actor.getString(FIRSTNAME), is(equalTo(fn)));
         assertThat(actor.getString(LASTNAME), is(equalTo(ln)));
+        System.out.println("ActorResourceIT.CrudForActorIntegrationTest() " + actor);
      }
 
      @Test

@@ -40,5 +40,15 @@ public class ActorManager {
         this.actorSaveEvent.fire(actor);
         return this.em.merge(actor);
     }
+
+    /**
+     * Find by Id
+     *
+     * @param id id to search
+     * @return Actor
+     */
+    public Actor findById(long id) {
+        return this.em.find(Actor.class, id);
+    }
     
 }
