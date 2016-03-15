@@ -6,6 +6,7 @@
 package com.rhcloud.javaee.movieinfo.business.actor.boundry;
 
 import com.airhacks.rulz.jaxrsclient.HttpMatchers;
+import static com.airhacks.rulz.jaxrsclient.HttpMatchers.successful;
 import com.airhacks.rulz.jaxrsclient.JAXRSClientProvider;
 import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.ActorResource.ACTORS_PATH;
 import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.JAXRSConfiguration.JAXRS_BASE;
@@ -16,7 +17,9 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.core.MediaType;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -43,27 +46,38 @@ public class ActorResourceIT {
         }
     }
     
-    private static final String URI = SERVER_URL + "/" + JAXRS_BASE + "/" + ACTORS_PATH;
+    private static final String URI = SERVER_URL + "/" + JAXRS_BASE;
     
     @Rule
     public JAXRSClientProvider provider = JAXRSClientProvider.buildWithURI(URI);
     
     private  JsonObject createActor(String firstname, String lastname){
          JsonObjectBuilder actorBuilder = Json.createObjectBuilder()
-                 .add("firstname", firstname)
-                 .add("lastname", lastname);
+                 .add(FIRSTNAME, firstname)
+                 .add(LASTNAME, lastname);
          return actorBuilder.build();
          
     }
+    private static final String LASTNAME = "lastname";
+    private static final String FIRSTNAME = "firstname";
     
      @Test
      public void CrudForActorIntegrationTest() {
         final String fn = "Matt";
         final String ln = "Daemon";
          
-        Response postResponse = provider.target().request().post(Entity.json(createActor(fn, ln)));
+        Response postResponse = provider.target().path("/" + ACTORS_PATH).request().post(Entity.json(createActor(fn, ln)));
+        assertThat(postResponse,is(successful()));
+        
         String location = postResponse.getHeaderString("Location");
         assertThat(location, is(notNullValue()));
+        
+        Response actorResponse = provider.target(location).request(APPLICATION_JSON).get();
+         assertThat(actorResponse, is(successful()));
+         
+        JsonObject actor = actorResponse.readEntity(JsonObject.class);
+        assertThat(actor.getString(FIRSTNAME), is(equalTo(fn)));
+        assertThat(actor.getString(LASTNAME), is(equalTo(ln)));
      }
 
      @Test
@@ -72,13 +86,13 @@ public class ActorResourceIT {
         Response getResponse = null;
         
         try{
-                getResponse = provider.target().request(MediaType.APPLICATION_JSON).get();
+                getResponse = provider.target().path("/" + ACTORS_PATH).request(APPLICATION_JSON).get();
         } finally {
             assumeThat(getResponse,is(notNullValue()));
         }
 
         
-        assertThat(getResponse, is(HttpMatchers.successful()));
+        assertThat(getResponse, is(successful()));
         assertThat(getResponse.hasEntity(), is(true));
         
         JsonArray payload = getResponse.readEntity(JsonArray.class);
