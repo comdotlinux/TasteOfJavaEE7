@@ -51,4 +51,19 @@ public class ActorManager {
         return this.em.find(Actor.class, id);
     }
     
+    public boolean delete(long id){
+        try{
+            Actor actor = findById(id);
+            if(null != actor){
+                this.em.remove(actor);
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            LOG.error("Exception occured", e);
+            return false;
+        }
+    }
+    
 }

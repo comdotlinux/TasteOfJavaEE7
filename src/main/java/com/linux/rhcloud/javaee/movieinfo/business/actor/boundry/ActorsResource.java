@@ -10,9 +10,12 @@ import com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor;
 import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
+import javax.json.JsonObject;
 import javax.validation.Valid;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -48,12 +51,28 @@ public class ActorsResource {
         return manager.all();
     }
     
+    @GET
     @Path("{id}")
-    public ActorResource find(@PathParam("id") long id){
-        return new ActorResource(id, this.manager);
+    @Produces(APPLICATION_JSON)
+    public Actor find(@PathParam("id") long id){
+        return this.manager.findById(id);
     }
     
-    /**
+    @PUT
+    @Path("{id}")
+    @Produces(APPLICATION_JSON)
+    public Actor update(@PathParam("id") long id, @Valid Actor actor){
+        return this.manager.save(actor);
+    }
+    
+    @DELETE
+    @Path("{id}")
+    @Produces(APPLICATION_JSON)
+    public boolean update(@PathParam("id") long id){
+        return this.manager.delete(id);
+    }
+    
+     /**
      * Add an actor
      * @param actor Actor to add
      * @param uriInfo instance of UriInfo to get absolute URI.

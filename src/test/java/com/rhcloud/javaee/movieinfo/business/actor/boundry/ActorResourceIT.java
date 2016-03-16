@@ -66,6 +66,7 @@ public class ActorResourceIT {
         final String fn = "Matt";
         final String ln = "Daemon";
          
+        // Post Actor
         Response postResponse = provider.target().path("/" + ACTORS_PATH).request(APPLICATION_JSON).post(Entity.json(createActor(fn, ln)));
         assertThat(postResponse,is(successful()));
         
@@ -73,6 +74,7 @@ public class ActorResourceIT {
         assertThat(location, is(notNullValue()));
         System.out.println("ActorResourceIT.CrudForActorIntegrationTest() " + location);
         
+        // Get Actor
         Response actorResponse = provider.target(location).request(APPLICATION_JSON).get();
         assertThat(actorResponse, is(successful()));
          
@@ -80,6 +82,10 @@ public class ActorResourceIT {
         assertThat(actor.getString(FIRSTNAME), is(equalTo(fn)));
         assertThat(actor.getString(LASTNAME), is(equalTo(ln)));
         System.out.println("ActorResourceIT.CrudForActorIntegrationTest() " + actor);
+        
+        // Delete Actor
+        Response deleteActor = provider.target(location).request(APPLICATION_JSON).delete();
+        
      }
 
      @Test
