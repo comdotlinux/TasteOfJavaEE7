@@ -5,6 +5,7 @@
  */
 package com.rhcloud.javaee.movieinfo.business.actor.boundry;
 
+import com.airhacks.rulz.jaxrsclient.HttpMatchers;
 import static com.airhacks.rulz.jaxrsclient.HttpMatchers.successful;
 import com.airhacks.rulz.jaxrsclient.JAXRSClientProvider;
 import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.ActorsResource.ACTORS_PATH;
@@ -15,6 +16,7 @@ import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+import javax.ws.rs.core.MediaType;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -60,7 +62,7 @@ public class ActorResourceIT {
     private static final String FIRSTNAME = "firstname";
     
      @Test
-     public void CrudForActorIntegrationTest() {
+     public void actor_integration_CRUD() {
         final String fn = "Matt";
         final String ln = "Daemon";
          
@@ -81,7 +83,7 @@ public class ActorResourceIT {
      }
 
      @Test
-     public void getAllActors() {
+     public void get_all_actors() {
          
         Response getResponse = null;
         
