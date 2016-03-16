@@ -85,6 +85,7 @@ public class ActorResourceIT {
         
         // Delete Actor
         Response deleteActor = provider.target(location).request(APPLICATION_JSON).delete();
+         assertThat(deleteActor, is(notNullValue()));
         
      }
 

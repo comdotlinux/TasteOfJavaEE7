@@ -56,6 +56,7 @@ public class ActorManager {
             Actor actor = findById(id);
             if(null != actor){
                 this.em.remove(actor);
+                LOG.warn("Removed actor {}", actor);
                 return true;
             } else {
                 return false;

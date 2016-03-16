@@ -68,8 +68,17 @@ public class ActorsResource {
     @DELETE
     @Path("{id}")
     @Produces(APPLICATION_JSON)
-    public boolean update(@PathParam("id") long id){
-        return this.manager.delete(id);
+    public Response update(@PathParam("id") long id){
+            
+        Response.Status status = Response.Status.RESET_CONTENT;
+          
+         if(this.manager.delete(id)){
+            status = Response.Status.RESET_CONTENT;
+         } else {
+             status = Response.Status.BAD_REQUEST;
+         }
+         
+         return Response.status(status).build();
     }
     
      /**
