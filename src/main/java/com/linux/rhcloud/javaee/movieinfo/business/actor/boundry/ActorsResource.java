@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -57,7 +58,10 @@ public class ActorsResource {
     @PUT
     @Path("{id}")
     @Produces(APPLICATION_JSON)
-    public Actor update(@PathParam("id") long id, @Valid Actor actor){
+    public Actor update(@PathParam("id") long id, @NotNull @Valid Actor actor){
+        if(actor.getId() != id){
+            actor.setId(id);
+        }
         return this.manager.save(actor);
     }
     
@@ -66,15 +70,8 @@ public class ActorsResource {
     @Produces(APPLICATION_JSON)
     public Response update(@PathParam("id") long id){
             
-        Response.Status status = Response.Status.RESET_CONTENT;
-          
-         if(this.manager.delete(id)){
-            status = Response.Status.RESET_CONTENT;
-         } else {
-             status = Response.Status.BAD_REQUEST;
-         }
-         
-         return Response.status(status).build();
+        Response.Status status = this.manager.delete(id)? Response.Status.RESET_CONTENT : Response.Status.BAD_REQUEST;
+        return Response.status(status).build();
     }
     
      /**
@@ -85,7 +82,7 @@ public class ActorsResource {
      */
     @POST
     @Produces(APPLICATION_JSON)
-    public Response addActor(@Valid Actor actor, @Context UriInfo uriInfo){
+    public Response addActor(@NotNull @Valid Actor actor, @Context UriInfo uriInfo){
         LOG.info("Creating Actor : {}", actor);
         Actor newActor = this.manager.save(actor);
         LOG.info("Created Actor : {}", newActor);

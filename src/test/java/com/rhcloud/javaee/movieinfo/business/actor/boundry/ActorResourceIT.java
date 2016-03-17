@@ -73,8 +73,8 @@ public class ActorResourceIT {
             assumeThat(getResponse, is(notNullValue()));
         }
 
-        final String fn = "Matt";
-        final String ln = "Daemon";
+        final String fn = "John";
+        final String ln = "Doe";
 
         // Post Actor
         Response postResponse = provider.target().path(FORWARD_SLASH + ACTORS_PATH).request(APPLICATION_JSON).post(Entity.json(createActor(fn, ln)));
@@ -93,6 +93,14 @@ public class ActorResourceIT {
         assertThat(actor.getString(LASTNAME), is(equalTo(ln)));
         System.out.println("ActorResourceIT.CrudForActorIntegrationTest() " + actor);
 
+        // Update Actor
+        final String newFn = "Jane";
+        JsonObject actorUpdate = Json.createObjectBuilder().add(FIRSTNAME, newFn).build();
+        Response putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
+        assertThat(putResponse, is(successful()));
+        assertThat(actor.getString(FIRSTNAME), is(equalTo(newFn)));
+        assertThat(actor.getString(LASTNAME), is(equalTo(ln)));
+        
         // Delete Actor
         Response deleteActor = provider.target(location).request(APPLICATION_JSON).delete();
         assertThat(deleteActor, is(successful()));
