@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.linux.rhcloud.javaee.movieinfo.business.actor.boundry;
 
 import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.ActorsResource.ACTORS_PATH;
@@ -27,7 +22,8 @@ import org.slf4j.Logger;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- *
+ * The Base Rest resource for accessing / updating Actors.
+ * 
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
 @Path(ACTORS_PATH)
