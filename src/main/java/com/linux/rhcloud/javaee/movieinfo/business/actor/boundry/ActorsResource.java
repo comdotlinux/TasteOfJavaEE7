@@ -4,6 +4,7 @@ import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.ActorsRe
 import com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor;
 import java.net.URI;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static javax.ws.rs.core.MediaType.APPLICATION_XML;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.slf4j.Logger;
@@ -28,9 +30,11 @@ import static org.slf4j.LoggerFactory.getLogger;
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
 @Path(ACTORS_PATH)
+@Stateless
+@Produces({APPLICATION_JSON, APPLICATION_XML})
 public class ActorsResource {
     
-    /** *  The Path for {@link ActorsResource}. The value is {@value #ACTORS_PATH}*/
+    /** The Path for {@link ActorsResource}. The value is {@value #ACTORS_PATH}*/
     public static final String ACTORS_PATH = "actors";
     
     private static final Logger LOG = getLogger(ActorsResource.class);
@@ -43,21 +47,18 @@ public class ActorsResource {
      * @return {@linkplain List} of {@linkplain Actor}
      */
     @GET
-    @Produces(APPLICATION_JSON)
     public List<Actor> getAllActors(){
         return manager.all();
     }
     
     @GET
     @Path("{id}")
-    @Produces(APPLICATION_JSON)
     public Actor find(@PathParam("id") long id){
         return this.manager.findById(id);
     }
     
     @PUT
     @Path("{id}")
-    @Produces(APPLICATION_JSON)
     public Actor update(@PathParam("id") long id, @NotNull @Valid Actor actor){
         if(actor.getId() != id){
             actor.setId(id);
@@ -67,7 +68,6 @@ public class ActorsResource {
     
     @DELETE
     @Path("{id}")
-    @Produces(APPLICATION_JSON)
     public Response update(@PathParam("id") long id){
             
         Response.Status status = this.manager.delete(id)? Response.Status.RESET_CONTENT : Response.Status.BAD_REQUEST;
@@ -81,7 +81,6 @@ public class ActorsResource {
      * @return
      */
     @POST
-    @Produces(APPLICATION_JSON)
     public Response addActor(@NotNull @Valid Actor actor, @Context UriInfo uriInfo){
         LOG.info("Creating Actor : {}", actor);
         Actor newActor = this.manager.save(actor);
