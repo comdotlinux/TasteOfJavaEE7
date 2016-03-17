@@ -67,7 +67,7 @@ public class ActorResourceIT {
         // Get Actor
         Response getResponse = null;        
         try {
-            getResponse = provider.target().path(FORWARD_SLASH + 1).request(APPLICATION_JSON).get();
+            getResponse = provider.target().path(FORWARD_SLASH + ACTORS_PATH + FORWARD_SLASH + 1).request(APPLICATION_JSON).get();
         } finally {
             System.out.println("Server responded ? " + (getResponse != null));
             assumeThat(getResponse, is(notNullValue()));
@@ -82,7 +82,7 @@ public class ActorResourceIT {
 
         String location = postResponse.getHeaderString("Location");
         assertThat(location, is(notNullValue()));
-        System.out.println("ActorResourceIT.CrudForActorIntegrationTest() " + location);
+        System.out.println("ActorResourceIT.actor_integration_CRUD() Post Actor Response Location : " + location);
 
         // Get Actor
         Response actorResponse = provider.target(location).request(APPLICATION_JSON).get();
@@ -91,19 +91,23 @@ public class ActorResourceIT {
         JsonObject actor = actorResponse.readEntity(JsonObject.class);
         assertThat(actor.getString(FIRSTNAME), is(equalTo(fn)));
         assertThat(actor.getString(LASTNAME), is(equalTo(ln)));
-        System.out.println("ActorResourceIT.CrudForActorIntegrationTest() " + actor);
+        System.out.println("ActorResourceIT.actor_integration_CRUD() Get Actor : " + actor);
 
         // Update Actor
         final String newFn = "Jane";
         JsonObject actorUpdate = Json.createObjectBuilder().add(FIRSTNAME, newFn).build();
         Response putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
         assertThat(putResponse, is(successful()));
-        assertThat(actor.getString(FIRSTNAME), is(equalTo(newFn)));
-        assertThat(actor.getString(LASTNAME), is(equalTo(ln)));
+        
+        JsonObject updatedActor = actorResponse.readEntity(JsonObject.class);
+        assertThat(updatedActor.getString(FIRSTNAME), is(equalTo(newFn)));
+        assertThat(updatedActor.getString(LASTNAME), is(equalTo(ln)));
+        System.out.println("ActorResourceIT.actor_integration_CRUD() Put Actor Response : " + updatedActor);
         
         // Delete Actor
         Response deleteActor = provider.target(location).request(APPLICATION_JSON).delete();
         assertThat(deleteActor, is(successful()));
+        System.out.println("ActorResourceIT.actor_integration_CRUD() Delete Actor Response : " + deleteActor);
 
     }
 
