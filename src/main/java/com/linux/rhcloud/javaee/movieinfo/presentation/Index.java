@@ -15,7 +15,7 @@ public class Index {
     private static final Logger LOG = getLogger(Index.class);
 
     public String getActorView(){
-        String actorView = "actorView";
+        String actorView = "faces/actorView";
         LOG.info("redirecting to {}", actorView);
         return actorView;
     }
