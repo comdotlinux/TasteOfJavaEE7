@@ -36,7 +36,7 @@ public class Film implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "film_id")
-    private String id;
+    private long id;
 
     @Column(name = "title")
     private String title;
@@ -75,11 +75,11 @@ public class Film implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
