@@ -45,29 +45,29 @@
         </h:form>
         <p:spacer></p:spacer>
         <h:form>
-            <p:dataTable id="actorsTable" var="actor" value="#{actors.actors}"
+            <p:dataTable id="actorstbl" var="peractor" value="#{actors.actors}"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                          paginator="true" rows="20" style="margin-bottom:20px">
 
                 <f:facet name="{Exporters}">
                     <h:commandLink>
                         <p:graphicImage name="images/excel.png" width="24"/>
-                        <p:dataExporter type="xlsx" target="actorsTable" fileName="actors-all" />
+                        <p:dataExporter type="xlsx" target="actorstbl" fileName="actors-all" />
                     </h:commandLink>
 
                     <h:commandLink>
                         <p:graphicImage name="images/pdf.png" width="24"/>
-                        <p:dataExporter type="pdf" target="actorsTable" fileName="actors-all"/>
+                        <p:dataExporter type="pdf" target="actorstbl" fileName="actors-all"/>
                     </h:commandLink>
 
                     <h:commandLink>
                         <p:graphicImage name="images/csv.png" width="24"/>
-                        <p:dataExporter type="csv" target="actorsTable" fileName="actors-all" />
+                        <p:dataExporter type="csv" target="actorstbl" fileName="actors-all" />
                     </h:commandLink>
 
                     <h:commandLink>
                         <p:graphicImage name="images/xml.png" width="24"/>
-                        <p:dataExporter type="xml" target="actorsTable" fileName="actors-all" />
+                        <p:dataExporter type="xml" target="actorstbl" fileName="actors-all" />
                     </h:commandLink>
                 </f:facet>
 
@@ -75,50 +75,50 @@
                     <f:facet name="header">
                         <h:outputText value="Actor Number" />
                     </f:facet>
-                    <h:outputText value="#{actor.id}" />
+                    <h:outputText value="#{peractor.id}" />
                 </p:column>
 
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="First Name"/>
                     </f:facet>
-                    <h:outputText value="#{actor.firstname}" />
+                    <h:outputText value="#{peractor.firstname}" />
                 </p:column>
 
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Last Name" />
                     </f:facet>
-                    <h:outputText value="#{actor.lastname}" />
+                    <h:outputText value="#{peractor.lastname}" />
                 </p:column>
 
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Last Update Date" />
                     </f:facet>
-                    <h:outputText value="#{actor.lastUpdateDate}" />
+                    <h:outputText value="#{peractor.lastUpdateDate}" />
                 </p:column>
             </p:dataTable>
 
             <h3>Export Page Data Only</h3>
             <h:commandLink>
                 <p:graphicImage name="images/excel.png" />
-                <p:dataExporter type="xls" target="actorsTable" fileName="actors-CurrentPage" pageOnly="true"/>
+                <p:dataExporter type="xls" target="actorstbl" fileName="actors-CurrentPage" pageOnly="true"/>
             </h:commandLink>
 
             <h:commandLink>
                 <p:graphicImage name="images/pdf.png" />
-                <p:dataExporter type="pdf" target="actorsTable" fileName="actors-CurrentPage" pageOnly="true" />
+                <p:dataExporter type="pdf" target="actorstbl" fileName="actors-CurrentPage" pageOnly="true" />
             </h:commandLink>
 
             <h:commandLink>
                 <p:graphicImage name="images/csv.png" />
-                <p:dataExporter type="csv" target="actorsTable" fileName="actors-CurrentPage" pageOnly="true" />
+                <p:dataExporter type="csv" target="actorstbl" fileName="actors-CurrentPage" pageOnly="true" />
             </h:commandLink>
 
             <h:commandLink>
                 <p:graphicImage name="images/xml.png" />
-                <p:dataExporter type="xml" target="actorsTable" fileName="actors-CurrentPage" pageOnly="true" />
+                <p:dataExporter type="xml" target="actorstbl" fileName="actors-CurrentPage" pageOnly="true" />
             </h:commandLink>
         </h:form>
     </h:body>
