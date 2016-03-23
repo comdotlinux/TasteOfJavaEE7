@@ -51,7 +51,7 @@ public class Actors {
 
     public Object addActor() {
         LOG.info("Adding Actor {}", this.actor);
-        Set<ConstraintViolation<Actor>> actorViolations = validator.validate(this.actor, Actor.class);
+        Set<ConstraintViolation<Actor>> actorViolations = validator.validate(this.actor);
         LOG.info("Actor violations are {} ", actorViolations);
         if(!actorViolations.isEmpty()){
             for (ConstraintViolation<Actor> actorViolation : actorViolations) {
