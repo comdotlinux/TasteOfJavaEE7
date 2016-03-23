@@ -1,5 +1,7 @@
 package com.linux.rhcloud.javaee.movieinfo.business.film.entity;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  *
  * @author guru
@@ -26,4 +28,15 @@ public enum Rating {
         return ratingCode;
     }
     
+    public static Rating value(String value){
+        Rating rating = null;
+        for (Rating r : Rating.values()) {
+            if(StringUtils.equals(r.getRatingCode(), value)){
+                rating = r;
+                break;
+            }
+        }
+        
+        return rating;
+    }
 }

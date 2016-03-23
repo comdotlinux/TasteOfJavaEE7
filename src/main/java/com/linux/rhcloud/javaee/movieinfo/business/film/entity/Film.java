@@ -38,7 +38,7 @@ public class Film implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "film_id")
-    private long id;
+    private String id;
 
     @Column(name = "title")
     private String title;
@@ -54,7 +54,7 @@ public class Film implements Serializable {
     private long languageId;
 
     @Column(name = "original_language_id")
-    private long originalLanguageId;
+    private Long originalLanguageId;
 
     @Column(name = "rental_duration")
     private int rentalDuration;
@@ -77,15 +77,15 @@ public class Film implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getTitle() {
+     public String getTitle() {
         return title;
     }
 
@@ -117,11 +117,11 @@ public class Film implements Serializable {
         this.languageId = languageId;
     }
 
-    public long getOriginalLanguageId() {
+    public Long getOriginalLanguageId() {
         return originalLanguageId;
     }
 
-    public void setOriginalLanguageId(long originalLanguageId) {
+    public void setOriginalLanguageId(Long originalLanguageId) {
         this.originalLanguageId = originalLanguageId;
     }
 
@@ -188,6 +188,6 @@ public class Film implements Serializable {
     
     @PostLoad
     public void updateEntityValues(){
-        rating = Rating.valueOf(ratingDb);
+        rating = Rating.value(ratingDb);
     }
 }
