@@ -20,5 +20,10 @@ public enum Rating {
     public String getRatingCode(){
         return ratingCode;
     }
+
+    @Override
+    public String toString() {
+        return ratingCode;
+    }
     
 }

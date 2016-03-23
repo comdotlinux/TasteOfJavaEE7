@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.PostLoad;
+import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -67,8 +69,9 @@ public class Film implements Serializable {
     private BigDecimal replacementConst;
 
     @Column(name = "rating")
-    @Enumerated(EnumType.STRING)
-    private Rating rating;
+    private String ratingDb;
+    
+    private transient Rating rating; // use this
 
     @Column(name = "last_update")
     @Temporal(TemporalType.TIMESTAMP)
@@ -169,5 +172,22 @@ public class Film implements Serializable {
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
+    
+//    public String getRatingDb() {
+//        return ratingDb;
+//    }
+//
+//    public void setRatingDb(String ratingDb) {
+//        this.ratingDb = ratingDb;
+//    }
 
+    @PrePersist
+    public void updateDbFields(){
+        ratingDb = rating.getRatingCode();
+    }
+    
+    @PostLoad
+    public void updateEntityValues(){
+        rating = Rating.valueOf(ratingDb);
+    }
 }
