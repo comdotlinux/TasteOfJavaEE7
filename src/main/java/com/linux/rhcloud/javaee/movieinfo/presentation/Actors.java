@@ -67,7 +67,7 @@ public class Actors {
         return null;
     }
 
-    public List<Actor> getActors() {
+    public List<Actor> getAllActors() {
         final List<Actor> allActors = this.actorManager.all();
         LOG.info("{} Actors retrieved.", allActors.size());
         return allActors;
