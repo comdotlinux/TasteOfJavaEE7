@@ -13,7 +13,7 @@
             <h:outputStylesheet library="css" name="app.css"></h:outputStylesheet>
     </h:head>
     <h:body>
-            <p:dataScroller value="#{filmView.allFilms}" var="film" chunkSize="50">
+            <p:dataScroller value="#{films.allFilms}" var="film" chunkSize="50">
                 <f:facet name="header">
                     <h:outputText value="Infinite scrolling." />
                 </f:facet>

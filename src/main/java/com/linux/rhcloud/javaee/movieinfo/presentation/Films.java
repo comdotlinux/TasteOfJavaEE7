@@ -12,7 +12,7 @@ import javax.inject.Inject;
  * @author guru
  */
 @Model
-public class FilmView {
+public class Films {
 
     private Film film;
     

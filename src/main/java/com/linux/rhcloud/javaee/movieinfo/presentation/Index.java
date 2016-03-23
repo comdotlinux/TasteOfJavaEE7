@@ -15,8 +15,14 @@ public class Index {
     private static final Logger LOG = getLogger(Index.class);
 
     public String getActorView(){
-        String actorView = "faces/actorView";
+        String actorView = "actors";
         LOG.info("redirecting to {}", actorView);
         return actorView;
+    }
+    
+    public String getFilmView(){
+         String filmView = "films";
+        LOG.info("redirecting to {}", filmView);
+        return filmView;
     }
 }

@@ -14,16 +14,17 @@ import javax.validation.Path;
 import javax.validation.Validator;
 import org.slf4j.Logger;
 import static org.slf4j.LoggerFactory.getLogger;
+import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * Backing bean for ActorView.xhtml
+ * Backing bean for Actors.xhtml
  *
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
 @Model
-public class ActorView {
+public class Actors {
 
-    private static final Logger LOG = getLogger(ActorView.class);
+    private static final Logger LOG = getLogger(Actors.class);
 
     private Actor actor;
 
