@@ -96,6 +96,8 @@ public class ActorResourceIT {
         final String newFn = "Jane";
         JsonObject actorUpdate = Json.createObjectBuilder()
                 .add(FIRSTNAME, newFn)
+                .add(LASTNAME, ln)
+                .add("version", actor.getInt("version"))
                 .build();
         Response putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
         assertThat(putResponse, is(successful()));
