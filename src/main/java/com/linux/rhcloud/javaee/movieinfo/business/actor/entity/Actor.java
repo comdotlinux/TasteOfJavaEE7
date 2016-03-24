@@ -14,6 +14,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -65,12 +66,16 @@ public class Actor implements Serializable, CrossFieldEntityValidator {
     private String firstname;
 
     @Column(name = LAST_NAME)
-    @Size(min = 3, max = 45)
+    @Size(max = 45)
     private String lastname;
 
     @Column(name = LAST_UPDATE)
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdateDate;
+    
+    @Version
+    private long version;
+
 
     public Actor(String firstname, String lastname) {
         this.firstname = firstname;
@@ -112,12 +117,26 @@ public class Actor implements Serializable, CrossFieldEntityValidator {
         this.lastUpdateDate = lastUpdateDate;
     }
 
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
+    
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return new ToStringBuilder(this, SHORT_PREFIX_STYLE).append(id).append(firstname).append(lastname).append(lastUpdateDate).toString();
+        return new ToStringBuilder(this, SHORT_PREFIX_STYLE)
+                .append(id)
+                .append(firstname)
+                .append(lastname)
+                .append(lastUpdateDate)
+                .append(version)
+                .toString();
     }
 
     @Override

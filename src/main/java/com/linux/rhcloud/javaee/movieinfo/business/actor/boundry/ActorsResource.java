@@ -6,7 +6,6 @@ import java.net.URI;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.json.JsonObject;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.DELETE;
@@ -18,7 +17,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static javax.ws.rs.core.MediaType.APPLICATION_XML;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.slf4j.Logger;
@@ -31,7 +29,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  */
 @Path(ACTORS_PATH)
 @Stateless
-@Produces({APPLICATION_JSON, APPLICATION_XML})
+@Produces({APPLICATION_JSON})
 public class ActorsResource {
     
     /** The Path for {@link ActorsResource}. The value is {@value #ACTORS_PATH}*/
@@ -59,7 +57,7 @@ public class ActorsResource {
     
     @PUT
     @Path("{id}")
-    public Actor update(@PathParam("id") long id, @NotNull @Valid Actor actor){
+    public Actor update(@PathParam("id") long id, @NotNull Actor actor){
         if(actor.getId() != id){
             actor.setId(id);
         }

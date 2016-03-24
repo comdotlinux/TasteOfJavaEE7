@@ -37,6 +37,8 @@ public class ActorManager {
      */
     public Actor save(Actor actor) {
         LOG.info("Persisting {}", actor);
+        
+        
         this.actorSaveEvent.fire(actor);
         return this.em.merge(actor);
     }
