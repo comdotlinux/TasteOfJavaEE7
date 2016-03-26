@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -30,6 +31,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Path(ACTORS_PATH)
 @Stateless
 @Produces({APPLICATION_JSON})
+@Consumes ({APPLICATION_JSON})
 public class ActorsResource {
     
     /** The Path for {@link ActorsResource}. The value is {@value #ACTORS_PATH}*/

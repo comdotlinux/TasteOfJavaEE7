@@ -26,7 +26,6 @@ import static org.junit.Assert.*;
 import static org.junit.Assume.assumeThat;
 import org.junit.Ignore;
 import org.junit.Rule;
-
 /**
  *
  * @author Guruprasad Kulkarni <guru@linux.com>
@@ -102,7 +101,7 @@ public class ActorResourceIT {
         Response putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
         assertThat(putResponse, is(successful()));
         
-        JsonObject updatedActor = actorResponse.readEntity(JsonObject.class);
+        JsonObject updatedActor = putResponse.readEntity(JsonObject.class);
         assertThat(updatedActor.getString(FIRSTNAME), is(equalTo(newFn)));
         assertThat(updatedActor.getString(LASTNAME), is(equalTo(ln)));
         System.out.println("ActorResourceIT.actor_integration_CRUD() Put Actor Response : " + updatedActor);
@@ -189,6 +188,6 @@ public class ActorResourceIT {
 
         JsonObject value = payload.getJsonObject(size - 1);
         assertThat(value, is(notNullValue()));
-        assertThat(value.getInt("id"), is(size));
+        assertThat(value.getInt("id") >= size, is(true));
     }
 }
