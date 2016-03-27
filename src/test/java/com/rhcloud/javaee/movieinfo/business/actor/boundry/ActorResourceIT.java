@@ -96,7 +96,6 @@ public class ActorResourceIT {
         JsonObject actorUpdate = Json.createObjectBuilder()
                 .add(FIRSTNAME, newFn)
                 .add(LASTNAME, ln)
-                .add("version", actor.getInt("version"))
                 .build();
         Response putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
         assertThat(putResponse, is(successful()));
@@ -151,7 +150,7 @@ public class ActorResourceIT {
         Response putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
         assertThat(putResponse, is(successful()));
         
-        JsonObject updatedActor = actorResponse.readEntity(JsonObject.class);
+        JsonObject updatedActor = putResponse.readEntity(JsonObject.class);
         assertThat(updatedActor.getString(FIRSTNAME), is(equalTo(newFn)));
         assertThat(updatedActor.getString(LASTNAME), is(equalTo(ln)));
         System.out.println("ActorResourceIT.actor_integration_CRUD() Put Actor Response : " + updatedActor);
