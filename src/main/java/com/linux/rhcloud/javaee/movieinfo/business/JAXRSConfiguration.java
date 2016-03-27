@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.linux.rhcloud.javaee.movieinfo.business.actor.boundry;
+package com.linux.rhcloud.javaee.movieinfo.business;
 
-import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.JAXRSConfiguration.JAXRS_BASE;
+import static com.linux.rhcloud.javaee.movieinfo.business.JAXRSConfiguration.JAXRS_BASE;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 

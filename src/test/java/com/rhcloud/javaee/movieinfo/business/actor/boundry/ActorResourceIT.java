@@ -8,7 +8,7 @@ package com.rhcloud.javaee.movieinfo.business.actor.boundry;
 import static com.airhacks.rulz.jaxrsclient.HttpMatchers.successful;
 import com.airhacks.rulz.jaxrsclient.JAXRSClientProvider;
 import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.ActorsResource.ACTORS_PATH;
-import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.JAXRSConfiguration.JAXRS_BASE;
+import static com.linux.rhcloud.javaee.movieinfo.business.JAXRSConfiguration.JAXRS_BASE;
 import java.util.ResourceBundle;
 import javax.ws.rs.client.Entity;
 import javax.json.Json;
@@ -17,15 +17,17 @@ import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.junit.Assume.assumeThat;
-import org.junit.Ignore;
 import org.junit.Rule;
+
 /**
  *
  * @author Guruprasad Kulkarni <guru@linux.com>
@@ -40,7 +42,7 @@ public class ActorResourceIT {
         if (bundle.containsKey(serverurl)) {
             SERVER_URL = bundle.getString(serverurl);
         } else {
-            SERVER_URL = null;
+            SERVER_URL = EMPTY;
         }
     }
     private static final String FORWARD_SLASH = "/";
@@ -59,11 +61,13 @@ public class ActorResourceIT {
     }
     private static final String LASTNAME = "lastname";
     private static final String FIRSTNAME = "firstname";
+    private static final String VERSION = "version";
+    
 
     @Test
     public void actor_integration_CRUD() {
         // Get Actor
-        Response getResponse = null;        
+        Response getResponse = null;
         try {
             getResponse = provider.target().path(FORWARD_SLASH + ACTORS_PATH + FORWARD_SLASH + 1).request(APPLICATION_JSON).get();
         } finally {
@@ -82,41 +86,44 @@ public class ActorResourceIT {
         assertThat(location, is(notNullValue()));
         System.out.println("ActorResourceIT.actor_integration_CRUD() Post Actor Response Location : " + location);
 
-        // Get Actor
-        Response actorResponse = provider.target(location).request(APPLICATION_JSON).get();
-        assertThat(actorResponse, is(successful()));
+        try {
 
-        JsonObject actor = actorResponse.readEntity(JsonObject.class);
-        assertThat(actor.getString(FIRSTNAME), is(equalTo(fn)));
-        assertThat(actor.getString(LASTNAME), is(equalTo(ln)));
-        System.out.println("ActorResourceIT.actor_integration_CRUD() Get Actor : " + actor);
-        
-        // Update Actor
-        final String newFn = "Jane";
-        JsonObject actorUpdate = Json.createObjectBuilder()
-                .add(FIRSTNAME, newFn)
-                .add(LASTNAME, ln)
-                .build();
-        Response putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
-        assertThat(putResponse, is(successful()));
-        
-        JsonObject updatedActor = putResponse.readEntity(JsonObject.class);
-        assertThat(updatedActor.getString(FIRSTNAME), is(equalTo(newFn)));
-        assertThat(updatedActor.getString(LASTNAME), is(equalTo(ln)));
-        System.out.println("ActorResourceIT.actor_integration_CRUD() Put Actor Response : " + updatedActor);
-        
-        // Delete Actor
-        Response deleteActor = provider.target(location).request(APPLICATION_JSON).delete();
-        assertThat(deleteActor, is(successful()));
-        System.out.println("ActorResourceIT.actor_integration_CRUD() Delete Actor Response : " + deleteActor);
+            // Get Actor
+            Response actorResponse = provider.target(location).request(APPLICATION_JSON).get();
+            assertThat(actorResponse, is(successful()));
+
+            JsonObject actor = actorResponse.readEntity(JsonObject.class);
+            assertThat(actor.getString(FIRSTNAME), is(equalTo(fn)));
+            assertThat(actor.getString(LASTNAME), is(equalTo(ln)));
+            System.out.println("ActorResourceIT.actor_integration_CRUD() Get Actor : " + actor);
+
+            // Update Actor
+            final String newFn = "Jane";
+            JsonObject actorUpdate = Json.createObjectBuilder()
+                    .add(FIRSTNAME, newFn)
+                    .add(LASTNAME, ln)
+                    .build();
+            Response putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
+            assertThat(putResponse, is(successful()));
+
+            JsonObject updatedActor = putResponse.readEntity(JsonObject.class);
+            assertThat(updatedActor.getString(FIRSTNAME), is(equalTo(newFn)));
+            assertThat(updatedActor.getString(LASTNAME), is(equalTo(ln)));
+            System.out.println("ActorResourceIT.actor_integration_CRUD() Put Actor Response : " + updatedActor);
+
+        } finally {
+            // Delete Actor
+            Response deleteActor = provider.target(location).request(APPLICATION_JSON).delete();
+            assertThat(deleteActor, is(successful()));
+            System.out.println("ActorResourceIT.actor_integration_CRUD() Delete Actor Response : " + deleteActor);
+        }
 
     }
-    
-    @Ignore
+
     @Test
     public void actor_integration_OptimisticLockingCheck() {
         // Get Actor
-        Response getResponse = null;        
+        Response getResponse = null;
         try {
             getResponse = provider.target().path(FORWARD_SLASH + ACTORS_PATH + FORWARD_SLASH + 1).request(APPLICATION_JSON).get();
         } finally {
@@ -133,35 +140,61 @@ public class ActorResourceIT {
 
         String location = postResponse.getHeaderString("Location");
         assertThat(location, is(notNullValue()));
-        System.out.println("ActorResourceIT.actor_integration_CRUD() Post Actor Response Location : " + location);
+        System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() Post Actor Response Location : " + location);
 
-        // Get Actor
-        Response actorResponse = provider.target(location).request(APPLICATION_JSON).get();
-        assertThat(actorResponse, is(successful()));
+        try {
+            // Get Actor
+            Response actorResponse = provider.target(location).request(APPLICATION_JSON).get();
+            assertThat(actorResponse, is(successful()));
 
-        JsonObject actor = actorResponse.readEntity(JsonObject.class);
-        assertThat(actor.getString(FIRSTNAME), is(equalTo(fn)));
-        assertThat(actor.getString(LASTNAME), is(equalTo(ln)));
-        System.out.println("ActorResourceIT.actor_integration_CRUD() Get Actor : " + actor);
+            JsonObject actor = actorResponse.readEntity(JsonObject.class);
+            assertThat(actor.getString(FIRSTNAME), is(equalTo(fn)));
+            assertThat(actor.getString(LASTNAME), is(equalTo(ln)));
+            assertThat(actor.keySet(), hasItem(VERSION));
+            
+            long version = actor.getJsonNumber(VERSION).longValue();
+            System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() Get Actor : " + actor);
 
-        // Update Actor Once
-        final String newFn = "Jane";
-        JsonObject actorUpdate = Json.createObjectBuilder().add(FIRSTNAME, newFn).build();
-        Response putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
-        assertThat(putResponse, is(successful()));
-        
-        JsonObject updatedActor = putResponse.readEntity(JsonObject.class);
-        assertThat(updatedActor.getString(FIRSTNAME), is(equalTo(newFn)));
-        assertThat(updatedActor.getString(LASTNAME), is(equalTo(ln)));
-        System.out.println("ActorResourceIT.actor_integration_CRUD() Put Actor Response : " + updatedActor);
-        
-        
-        
-        
-        // Delete Actor
-        Response deleteActor = provider.target(location).request(APPLICATION_JSON).delete();
-        assertThat(deleteActor, is(successful()));
-        System.out.println("ActorResourceIT.actor_integration_CRUD() Delete Actor Response : " + deleteActor);
+            // Update Actor Once
+            final String newFn = "Jane";
+            JsonObject actorUpdate = Json.createObjectBuilder()
+                    .add(FIRSTNAME, newFn)
+                    .add(LASTNAME, ln)
+                    .add(VERSION,version)
+                    .build();
+            Response putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
+            assertThat(putResponse, is(successful()));
+
+            JsonObject updatedActor = putResponse.readEntity(JsonObject.class);
+            assertThat(updatedActor.getString(FIRSTNAME), is(equalTo(newFn)));
+            assertThat(updatedActor.getString(LASTNAME), is(equalTo(ln)));
+            System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() update Actor once Response : " + updatedActor);
+
+            
+            // Update Actor Second time
+            final String newFn2 = "Jamie";
+            actorUpdate = Json.createObjectBuilder()
+                    .add(FIRSTNAME, newFn2)
+                    .add(LASTNAME, ln)
+                    .add(VERSION, version)
+                    .build();
+            putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
+            assertThat(putResponse.getStatus(), is(409));
+            System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() update Actor second time Response : " + putResponse);
+
+//            updatedActor = putResponse.readEntity(JsonObject.class);
+//            assertThat(updatedActor.getString(FIRSTNAME), is(equalTo(newFn)));
+//            assertThat(updatedActor.getString(LASTNAME), is(equalTo(ln)));
+//            System.out.println("ActorResourceIT.actor_integration_CRUD() Put Actor Response : " + updatedActor);
+            
+        } finally {
+
+            // Delete Actor
+            Response deleteActor = provider.target(location).request(APPLICATION_JSON).delete();
+            assertThat(deleteActor, is(successful()));
+            System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() Delete Actor Response : " + deleteActor);
+
+        }
 
     }
 
