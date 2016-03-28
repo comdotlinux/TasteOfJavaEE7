@@ -182,10 +182,10 @@ public class ActorResourceIT {
             assertThat(putResponse.getStatus(), is(409));
             System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() update Actor second time Response : " + putResponse);
 
-//            updatedActor = putResponse.readEntity(JsonObject.class);
-//            assertThat(updatedActor.getString(FIRSTNAME), is(equalTo(newFn)));
-//            assertThat(updatedActor.getString(LASTNAME), is(equalTo(ln)));
-//            System.out.println("ActorResourceIT.actor_integration_CRUD() Put Actor Response : " + updatedActor);
+            updatedActor = putResponse.readEntity(JsonObject.class);
+            assertThat(updatedActor.getString(FIRSTNAME), is(equalTo(newFn)));
+            assertThat(updatedActor.getString(LASTNAME), is(equalTo(ln)));
+            System.out.println("ActorResourceIT.actor_integration_CRUD() Put Actor Response : " + updatedActor);
             
         } finally {
 
