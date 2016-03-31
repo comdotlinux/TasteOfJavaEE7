@@ -47,7 +47,6 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Path(ACTORS_PATH)
 @Stateless
 @Produces({APPLICATION_JSON})
-@Consumes ({APPLICATION_JSON})
 public class ActorsResource {
     
     /** The Path for {@link ActorsResource}. The value is {@value #ACTORS_PATH}*/
