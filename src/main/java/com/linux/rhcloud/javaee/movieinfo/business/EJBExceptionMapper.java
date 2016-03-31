@@ -36,20 +36,21 @@ public class EJBExceptionMapper implements ExceptionMapper<EJBException>{
     public Response toResponse(EJBException ejbEx) {
         Throwable cause = ejbEx.getCause();
         
-        // Build default response.
-        Response errorResponse = Response
-                .serverError()
-                .header(CAUSE, ejbEx.toString())
-                .build();
         
         if(cause instanceof OptimisticLockException){
-            errorResponse = Response.status(Response.Status.CONFLICT)
-                    .header(CAUSE, "There was a conflict. Details are : " + cause)
+            final OptimisticLockException actual = (OptimisticLockException) cause;
+            return Response.status(Response.Status.CONFLICT)
+                    .header(CAUSE, "There was a conflict. Details are : " + actual.getEntity())
+                    .header("additional-info", actual.getMessage())
                     .build();
         }
         
         
-        return errorResponse;
+        // Build default response.
+        return Response
+                .serverError()
+                .header(CAUSE, ejbEx.toString())
+                .build();
     }
     
 }
