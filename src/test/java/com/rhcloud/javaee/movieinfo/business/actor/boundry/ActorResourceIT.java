@@ -16,8 +16,11 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
+import org.hamcrest.CoreMatchers;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
@@ -142,51 +145,56 @@ public class ActorResourceIT {
         System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() Post Actor Response Location : " + location);
 
         try {
-        // Get Actor
-        Response actorResponse = provider.target(location).request(APPLICATION_JSON).get();
-        assertThat(actorResponse, is(successful()));
+            // Get Actor
+            Response actorResponse = provider.target(location).request(APPLICATION_JSON).get();
+            assertThat(actorResponse, is(successful()));
 
-        JsonObject actor = actorResponse.readEntity(JsonObject.class);
-        assertThat(actor.getString(FIRSTNAME), is(equalTo(fn)));
-        assertThat(actor.getString(LASTNAME), is(equalTo(ln)));
-        assertThat(actor.keySet(), hasItem(VERSION));
+            JsonObject actor = actorResponse.readEntity(JsonObject.class);
+            assertThat(actor.getString(FIRSTNAME), is(equalTo(fn)));
+            assertThat(actor.getString(LASTNAME), is(equalTo(ln)));
+            assertThat(actor.keySet(), hasItem(VERSION));
 
-        long version = actor.getJsonNumber(VERSION).longValue();
-        System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() Get Actor : " + actor);
+            long version = actor.getJsonNumber(VERSION).longValue();
+            System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() Get Actor : " + actor);
 
-        // Update Actor Once
-        final String newFn = "Jane";
-        JsonObject actorUpdate = Json.createObjectBuilder()
-                .add(FIRSTNAME, newFn)
-                .add(LASTNAME, ln)
-                .add(VERSION, version)
-                .build();
-        Response putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
-        assertThat(putResponse, is(successful()));
+            // Update Actor Once
+            final String newFn = "Jane";
+            JsonObject actorUpdate = Json.createObjectBuilder()
+                    .add(FIRSTNAME, newFn)
+                    .add(LASTNAME, ln)
+                    .add(VERSION, version)
+                    .build();
+            Response putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
+            assertThat(putResponse, is(successful()));
 
-        JsonObject updatedActor = putResponse.readEntity(JsonObject.class);
-        assertThat(updatedActor.getString(FIRSTNAME), is(equalTo(newFn)));
-        assertThat(updatedActor.getString(LASTNAME), is(equalTo(ln)));
-        System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() update Actor once Response : " + updatedActor);
+            JsonObject updatedActor = putResponse.readEntity(JsonObject.class);
+            assertThat(updatedActor.getString(FIRSTNAME), is(equalTo(newFn)));
+            assertThat(updatedActor.getString(LASTNAME), is(equalTo(ln)));
+            System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() update Actor once Response : " + updatedActor);
 
-        // Update Actor Second time
-        final String newFn2 = "Jamie";
-        actorUpdate = Json.createObjectBuilder()
-                .add(FIRSTNAME, newFn2)
-                .add(LASTNAME, ln)
-                .add(VERSION, version)
-                .build();
-        putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
-        assertThat(putResponse.getStatus(), is(409));
-        System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() update Actor second time Response : " + putResponse);
-        putResponse.getHeaders().forEach((key, value) -> {System.out.println("actor_integration_OptimisticLockingCheck() : key : " + key + ", value : " + value);});
+            // Update Actor Second time
+            final String newFn2 = "Jamie";
+            actorUpdate = Json.createObjectBuilder()
+                    .add(FIRSTNAME, newFn2)
+                    .add(LASTNAME, ln)
+                    .add(VERSION, version)
+                    .build();
+            putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
+            assertThat(putResponse.getStatus(), is(409));
+            System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() update Actor second time Response : " + putResponse);
+            final MultivaluedMap<String, Object> putResponseHeaders = putResponse.getHeaders();
+            putResponseHeaders.forEach((key, value) -> {
+                System.out.println("actor_integration_OptimisticLockingCheck() : key : " + key + ", value : " + value);
+            });
 
+            assertThat((String) putResponseHeaders.getFirst("Cause"), containsString("There was a conflict. Details are :"));
+            assertThat((String) putResponseHeaders.getFirst("additional-info"), containsString("Row was updated or deleted by another transaction"));
 
         } finally {
-        // Delete Actor
-        Response deleteActor = provider.target(location).request(APPLICATION_JSON).delete();
-        assertThat(deleteActor, is(successful()));
-        System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() Delete Actor Response : " + deleteActor);
+            // Delete Actor
+            Response deleteActor = provider.target(location).request(APPLICATION_JSON).delete();
+            assertThat(deleteActor, is(successful()));
+            System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() Delete Actor Response : " + deleteActor);
 
         }
     }

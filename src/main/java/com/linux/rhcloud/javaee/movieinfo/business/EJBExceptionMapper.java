@@ -31,7 +31,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Provider
 public class EJBExceptionMapper implements ExceptionMapper<EJBException>{
 
-    private static final String CAUSE = "cause";
+    private static final String CAUSE = "Cause";
     
     private static final Logger LOG = getLogger(EJBExceptionMapper.class);
     
