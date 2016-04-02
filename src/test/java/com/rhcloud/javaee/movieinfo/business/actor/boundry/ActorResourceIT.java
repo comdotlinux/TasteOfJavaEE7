@@ -62,7 +62,6 @@ public class ActorResourceIT {
     private static final String LASTNAME = "lastname";
     private static final String FIRSTNAME = "firstname";
     private static final String VERSION = "version";
-    
 
     @Test
     public void actor_integration_CRUD() {
@@ -143,59 +142,53 @@ public class ActorResourceIT {
         System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() Post Actor Response Location : " + location);
 
         try {
-            // Get Actor
-            Response actorResponse = provider.target(location).request(APPLICATION_JSON).get();
-            assertThat(actorResponse, is(successful()));
+        // Get Actor
+        Response actorResponse = provider.target(location).request(APPLICATION_JSON).get();
+        assertThat(actorResponse, is(successful()));
 
-            JsonObject actor = actorResponse.readEntity(JsonObject.class);
-            assertThat(actor.getString(FIRSTNAME), is(equalTo(fn)));
-            assertThat(actor.getString(LASTNAME), is(equalTo(ln)));
-            assertThat(actor.keySet(), hasItem(VERSION));
-            
-            long version = actor.getJsonNumber(VERSION).longValue();
-            System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() Get Actor : " + actor);
+        JsonObject actor = actorResponse.readEntity(JsonObject.class);
+        assertThat(actor.getString(FIRSTNAME), is(equalTo(fn)));
+        assertThat(actor.getString(LASTNAME), is(equalTo(ln)));
+        assertThat(actor.keySet(), hasItem(VERSION));
 
-            // Update Actor Once
-            final String newFn = "Jane";
-            JsonObject actorUpdate = Json.createObjectBuilder()
-                    .add(FIRSTNAME, newFn)
-                    .add(LASTNAME, ln)
-                    .add(VERSION,version)
-                    .build();
-            Response putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
-            assertThat(putResponse, is(successful()));
+        long version = actor.getJsonNumber(VERSION).longValue();
+        System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() Get Actor : " + actor);
 
-            JsonObject updatedActor = putResponse.readEntity(JsonObject.class);
-            assertThat(updatedActor.getString(FIRSTNAME), is(equalTo(newFn)));
-            assertThat(updatedActor.getString(LASTNAME), is(equalTo(ln)));
-            System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() update Actor once Response : " + updatedActor);
+        // Update Actor Once
+        final String newFn = "Jane";
+        JsonObject actorUpdate = Json.createObjectBuilder()
+                .add(FIRSTNAME, newFn)
+                .add(LASTNAME, ln)
+                .add(VERSION, version)
+                .build();
+        Response putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
+        assertThat(putResponse, is(successful()));
 
-            
-            // Update Actor Second time
-            final String newFn2 = "Jamie";
-            actorUpdate = Json.createObjectBuilder()
-                    .add(FIRSTNAME, newFn2)
-                    .add(LASTNAME, ln)
-                    .add(VERSION, version)
-                    .build();
-            putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
-            assertThat(putResponse.getStatus(), is(409));
-            System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() update Actor second time Response : " + putResponse);
+        JsonObject updatedActor = putResponse.readEntity(JsonObject.class);
+        assertThat(updatedActor.getString(FIRSTNAME), is(equalTo(newFn)));
+        assertThat(updatedActor.getString(LASTNAME), is(equalTo(ln)));
+        System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() update Actor once Response : " + updatedActor);
 
-            updatedActor = putResponse.readEntity(JsonObject.class);
-            assertThat(updatedActor.getString(FIRSTNAME), is(equalTo(newFn)));
-            assertThat(updatedActor.getString(LASTNAME), is(equalTo(ln)));
-            System.out.println("ActorResourceIT.actor_integration_CRUD() Put Actor Response : " + updatedActor);
-            
+        // Update Actor Second time
+        final String newFn2 = "Jamie";
+        actorUpdate = Json.createObjectBuilder()
+                .add(FIRSTNAME, newFn2)
+                .add(LASTNAME, ln)
+                .add(VERSION, version)
+                .build();
+        putResponse = provider.target(location).request(APPLICATION_JSON).put(Entity.json(actorUpdate));
+        assertThat(putResponse.getStatus(), is(409));
+        System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() update Actor second time Response : " + putResponse);
+        putResponse.getHeaders().forEach((key, value) -> {System.out.println("actor_integration_OptimisticLockingCheck() : key : " + key + ", value : " + value);});
+
+
         } finally {
-
-            // Delete Actor
-            Response deleteActor = provider.target(location).request(APPLICATION_JSON).delete();
-            assertThat(deleteActor, is(successful()));
-            System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() Delete Actor Response : " + deleteActor);
+        // Delete Actor
+        Response deleteActor = provider.target(location).request(APPLICATION_JSON).delete();
+        assertThat(deleteActor, is(successful()));
+        System.out.println("ActorResourceIT.actor_integration_OptimisticLockingCheck() Delete Actor Response : " + deleteActor);
 
         }
-
     }
 
     @Test

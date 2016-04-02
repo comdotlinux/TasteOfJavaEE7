@@ -18,9 +18,9 @@ package com.linux.rhcloud.javaee.movieinfo.business;
 
 import javax.ejb.EJBException;
 import javax.persistence.OptimisticLockException;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 import org.slf4j.Logger;
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -28,7 +28,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  * Map all Exceptions wrapped by {@linkplain EJBException} and send appropriate exception response.
  * @author guru
  */
-@Produces
+@Provider
 public class EJBExceptionMapper implements ExceptionMapper<EJBException>{
 
     private static final String CAUSE = "cause";
