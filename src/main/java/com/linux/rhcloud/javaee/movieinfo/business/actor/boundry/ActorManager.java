@@ -17,10 +17,12 @@
 package com.linux.rhcloud.javaee.movieinfo.business.actor.boundry;
 
 import com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor;
+import com.linux.rhcloud.javaee.movieinfo.crosscutting.logger.boundry.BoundryLogger;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
@@ -31,6 +33,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
 @Stateless
+@Interceptors(BoundryLogger.class)
 public class ActorManager {
 
     private static final Logger LOG = getLogger(ActorManager.class);
