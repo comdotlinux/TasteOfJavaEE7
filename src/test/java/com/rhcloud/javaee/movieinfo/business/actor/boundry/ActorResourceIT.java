@@ -223,4 +223,24 @@ public class ActorResourceIT {
         assertThat(value, is(notNullValue()));
         assertThat(value.getInt("id") >= size, is(true));
     }
+    
+    @Test
+    public void crossFieldValidationCheck(){
+         // Get Actor
+        Response getResponse = null;
+        try {
+            getResponse = provider.target().path(FORWARD_SLASH + ACTORS_PATH + FORWARD_SLASH + 1).request(APPLICATION_JSON).get();
+        } finally {
+            System.out.println("Server responded ? " + (getResponse != null));
+            assumeThat(getResponse, is(notNullValue()));
+        }
+        
+        // post with invalid input
+        final String fn = "Joh";
+        final String ln = "Doe";
+
+        // Post Actor
+        Response postResponse = provider.target().path(FORWARD_SLASH + ACTORS_PATH).request(APPLICATION_JSON).post(Entity.json(createActor(fn, ln)));
+        assertThat(postResponse, is(successful()));
+    }
 }
