@@ -10,6 +10,7 @@ import javax.persistence.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.After;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -40,8 +41,8 @@ public class ActorManualSetupPersistanceIT {
          
         assertThat(actual.getFirstname(), is(FN));
         assertThat(actual.getLastname(), is(LN));
-        assertThat(actual.getVersion(), is(1l));
-        assertThat(actual.getId(), is(1l));
+        assertTrue(actual.getVersion() >= 1l);
+        assertTrue(actual.getId()>= 1l);
      }
     
     

@@ -9,6 +9,7 @@ import com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor;
 import com.rhcloud.javaee.junit.rules.JpaEmProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.Rule;
 
@@ -17,23 +18,23 @@ import org.junit.Rule;
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
 public class ActorUseJunitRuleIT {
-    
+
     @Rule
     public JpaEmProvider provider = JpaEmProvider.persistenceUnit("it");
-    
+
     private static final String FN = "John";
     private static final String LN = "Doe";
-    
+
     @Test
     public void actor_persistence_check() {
         provider.start();
         Actor actual = provider.em().merge(new Actor(FN, LN));
         provider.stop();
-        
+
         System.out.println("Actor : " + actual.toString());
         assertThat(actual.getFirstname(), is(FN));
         assertThat(actual.getLastname(), is(LN));
-        assertThat(actual.getVersion(), is(1l));
-        assertThat(actual.getId(), is(1l));
+        assertTrue(actual.getVersion() >= 1l);
+        assertTrue(actual.getId() >= 1l);
     }
 }

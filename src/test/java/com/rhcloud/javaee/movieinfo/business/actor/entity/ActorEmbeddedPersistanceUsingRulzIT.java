@@ -15,6 +15,7 @@ import static com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor.FIN
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.TypedQuery;
+import static org.junit.Assert.assertTrue;
 
 /**
  *
@@ -36,26 +37,28 @@ public class ActorEmbeddedPersistanceUsingRulzIT {
 
         assertThat(actual.getFirstname(), is(FN));
         assertThat(actual.getLastname(), is(LN));
+        assertTrue(actual.getVersion() >= 1l);
+        assertTrue(actual.getId() >= 1l);
     }
-    
+
     @Test
-    public void getAllActors(){
-        
+    public void getAllActors() {
+
         List<Actor> actors = Arrays.asList(new Actor("One", "One"), new Actor("Two", "Two"), new Actor("Three", "Three"));
-        
+
         this.provider.tx().begin();
         actors.stream().forEach((a) -> {
             this.provider.em().merge(a);
         });
         this.provider.tx().commit();
-        
+
         this.provider.tx().begin();
         TypedQuery<Actor> createNamedQuery = this.provider.em().createNamedQuery(FIND_ALL_ACTORS, Actor.class);
         List<Actor> resultList = createNamedQuery.getResultList();
-        
+        this.provider.tx().commit();
+
         assertThat(resultList.size(), is(actors.size()));
-        
-        
+
     }
-    
+
 }
