@@ -11,6 +11,10 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Test;
 import org.junit.Rule;
+import static com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor.FIND_ALL_ACTORS;
+import java.util.Arrays;
+import java.util.List;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -32,7 +36,26 @@ public class ActorEmbeddedPersistanceUsingRulzIT {
 
         assertThat(actual.getFirstname(), is(FN));
         assertThat(actual.getLastname(), is(LN));
-        assertThat(actual.getVersion(), is(1l));
-        assertThat(actual.getId(), is(1l));
     }
+    
+    @Test
+    public void getAllActors(){
+        
+        List<Actor> actors = Arrays.asList(new Actor("One", "One"), new Actor("Two", "Two"), new Actor("Three", "Three"));
+        
+        this.provider.tx().begin();
+        actors.stream().forEach((a) -> {
+            this.provider.em().merge(a);
+        });
+        this.provider.tx().commit();
+        
+        this.provider.tx().begin();
+        TypedQuery<Actor> createNamedQuery = this.provider.em().createNamedQuery(FIND_ALL_ACTORS, Actor.class);
+        List<Actor> resultList = createNamedQuery.getResultList();
+        
+        assertThat(resultList.size(), is(actors.size()));
+        
+        
+    }
+    
 }
