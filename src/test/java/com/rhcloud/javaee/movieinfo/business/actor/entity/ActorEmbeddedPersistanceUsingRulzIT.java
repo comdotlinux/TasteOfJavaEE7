@@ -5,49 +5,34 @@
  */
 package com.rhcloud.javaee.movieinfo.business.actor.entity;
 
+import com.airhacks.rulz.em.EntityManagerProvider;
 import com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor;
-import javax.persistence.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.Rule;
 
 /**
  *
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
-public class ActorManualSetupPersistanceIT {
+public class ActorEmbeddedPersistanceUsingRulzIT {
 
-    private EntityManager em;
-    private EntityTransaction tx;
-    
-    private static final String FN = "John";
+    @Rule
+    public EntityManagerProvider provider = EntityManagerProvider.persistenceUnit("it");
+
+    private static final String FN = "Jane";
     private static final String LN = "Doe";
-    
-    @Before
-    public void setUp() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("it");
-        this.em = emf.createEntityManager();
-        this.tx = this.em.getTransaction();
-    }
-    
-     @Test
-     public void actor_persistence_check() {
-         tx.begin();
-        Actor actual = em.merge(new Actor(FN, LN));
-         tx.commit();
-         
+
+    @Test
+    public void mergeActorUsingRulz() {
+        provider.tx().begin();
+        Actor actual = provider.em().merge(new Actor(FN, LN));
+        provider.tx().commit();
+
         assertThat(actual.getFirstname(), is(FN));
         assertThat(actual.getLastname(), is(LN));
         assertThat(actual.getVersion(), is(1l));
         assertThat(actual.getId(), is(1l));
-     }
-    
-    
-    @After
-    public void tearDown() {
-        em.clear();
     }
-
 }
