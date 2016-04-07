@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  *
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
-public class ActorIT {
+public class ActorManualSetupPersistanceIT {
 
     private EntityManager em;
     private EntityTransaction tx;

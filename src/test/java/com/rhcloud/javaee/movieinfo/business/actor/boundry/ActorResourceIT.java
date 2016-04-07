@@ -40,7 +40,7 @@ public class ActorResourceIT {
     private static final String SERVER_URL;
 
     static {
-        ResourceBundle bundle = ResourceBundle.getBundle("application-test");
+        ResourceBundle bundle = ResourceBundle.getBundle("com.rhcloud.javaee.application-test");
         final String serverurl = "server.url";
         if (bundle.containsKey(serverurl)) {
             SERVER_URL = bundle.getString(serverurl);
