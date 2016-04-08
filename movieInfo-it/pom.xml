@@ -5,20 +5,97 @@
     <artifactId>movieInfo-it</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+<!-- Test dependencies below (scope should be test ONLY) --> 
     <dependencies>
+         <!-- Other dependencies --> 
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${apache.commonslang3.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>${bytebuddy.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>${easymock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>2.22.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.json</artifactId>
+            <version>1.0.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-processing</artifactId>
+            <version>2.22.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.airhacks.rulz</groupId>
+            <artifactId>jaxrsclient</artifactId>
+            <version>0.0.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.airhacks.rulz</groupId>
+            <artifactId>em</artifactId>
+            <version>0.0.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.5.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.12.1.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
         <finalName>movieInfo-it</finalName>
     </build>
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
+        <apache.commonslang3.version>3.3.2</apache.commonslang3.version>
+        <logback.core.version>1.1.3</logback.core.version>
+        <slf4j.version>1.7.13</slf4j.version>
+        <bytebuddy.version>0.7.7</bytebuddy.version>
+        <junit.version>4.12</junit.version>
+        <hamcrest.version>1.3.RC2</hamcrest.version>
+        <easymock.version>3.4</easymock.version>
     </properties>
 </project>

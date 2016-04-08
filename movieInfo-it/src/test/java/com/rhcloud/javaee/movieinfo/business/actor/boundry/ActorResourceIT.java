@@ -7,8 +7,6 @@ package com.rhcloud.javaee.movieinfo.business.actor.boundry;
 
 import static com.airhacks.rulz.jaxrsclient.HttpMatchers.successful;
 import com.airhacks.rulz.jaxrsclient.JAXRSClientProvider;
-import static com.linux.rhcloud.javaee.movieinfo.business.actor.boundry.ActorsResource.ACTORS_PATH;
-import static com.linux.rhcloud.javaee.movieinfo.business.JAXRSConfiguration.JAXRS_BASE;
 import java.util.ResourceBundle;
 import javax.ws.rs.client.Entity;
 import javax.json.Json;
@@ -19,7 +17,6 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
-import org.hamcrest.CoreMatchers;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
@@ -38,6 +35,8 @@ import org.junit.Rule;
 public class ActorResourceIT {
 
     private static final String SERVER_URL;
+    public static final String ACTORS_PATH = "actors";
+    public static final String JAXRS_BASE = "resources";
 
     static {
         ResourceBundle bundle = ResourceBundle.getBundle("com.rhcloud.javaee.application-test");
