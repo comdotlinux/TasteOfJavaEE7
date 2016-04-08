@@ -111,12 +111,6 @@
         </dependency>
         <dependency>
             <groupId>com.airhacks.rulz</groupId>
-            <artifactId>jaxrsclient</artifactId>
-            <version>0.0.3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.airhacks.rulz</groupId>
             <artifactId>em</artifactId>
             <version>0.0.2</version>
             <scope>test</scope>

@@ -23,6 +23,8 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import org.hamcrest.CustomMatcher;
+import org.hamcrest.Matcher;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.junit.Assume.assumeThat;
@@ -240,6 +242,25 @@ public class ActorResourceIT {
 
         // Post Actor
         Response postResponse = provider.target().path(FORWARD_SLASH + ACTORS_PATH).request(APPLICATION_JSON).post(Entity.json(createActor(fn, ln)));
-        assertThat(postResponse, is(successful()));
+        assertThat(postResponse, is(clientError()));
+        
+        final MultivaluedMap<String, Object> postResponseHeaders = postResponse.getHeaders();
+            postResponseHeaders.forEach((key, value) -> {
+                System.out.println("crossFieldValidationCheck() : key : " + key + ", value : " + value);
+            });
+            
+        assertThat(postResponse.getHeaderString("validation-exception"), is("true"));
+        
+    }
+    
+     public static Matcher<Response> clientError() {
+        return new CustomMatcher<Response>("is 4xx family of response") {
+
+            @Override
+            public boolean matches(Object o) {
+                return (o instanceof Response)
+                        && (((Response) o).getStatusInfo().getFamily() == Response.Status.Family.CLIENT_ERROR);
+            }
+        };
     }
 }
