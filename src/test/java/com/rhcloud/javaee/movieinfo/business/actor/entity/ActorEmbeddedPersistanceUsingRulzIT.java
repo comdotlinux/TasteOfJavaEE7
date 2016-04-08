@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import static org.junit.Assert.assertTrue;
+import org.junit.Before;
 
 /**
  *
@@ -28,6 +29,14 @@ public class ActorEmbeddedPersistanceUsingRulzIT {
 
     private static final String FN = "Jane";
     private static final String LN = "Doe";
+    
+    @Before
+    public void setUp(){
+        provider.tx().begin();
+        provider.em().createNativeQuery("TRUNCATE TABLE actor;");
+        provider.tx().commit();
+    }
+    
 
     @Test
     public void mergeActorUsingRulz() {
@@ -35,6 +44,7 @@ public class ActorEmbeddedPersistanceUsingRulzIT {
         Actor actual = provider.em().merge(new Actor(FN, LN));
         provider.tx().commit();
 
+        System.out.println("ActorEmbeddedPersistanceUsingRulzIT.mergeActorUsingRulz() actual :: " + actual);
         assertThat(actual.getFirstname(), is(FN));
         assertThat(actual.getLastname(), is(LN));
         assertTrue(actual.getVersion() >= 1l);
