@@ -18,10 +18,10 @@ hs_err_pid*
 
 */target/**
 /target/
-/src/main/webapp/welcomePrimefaces.xhtml
-/src/main/webapp/WEB-INF/jboss-web.xml
-/nbproject/
+**/src/main/webapp/welcomePrimefaces.xhtml
+**/src/main/webapp/WEB-INF/jboss-web.xml
+**/nbproject/**
 
 # Log files
-*.log
-/itdb/
+**/*.log
+**/itdb/**
