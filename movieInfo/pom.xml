@@ -6,7 +6,7 @@
     <artifactId>javaee7app</artifactId>
     <packaging>war</packaging>
     <version>1.0</version>
-    <name>javaee7app</name>
+    <name>movie-info</name>
   
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -131,7 +131,7 @@
     
     
     <build>
-        <finalName>javaee7app</finalName>
+        <finalName>movie-info</finalName>
     </build>
 
     <profiles>
