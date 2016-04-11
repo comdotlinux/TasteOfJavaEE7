@@ -83,7 +83,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>movieInfo-it</finalName>
+        <finalName>movie-info-it</finalName>
     </build>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
