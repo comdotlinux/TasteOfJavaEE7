@@ -11,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -34,15 +37,21 @@ public class Customer implements Serializable, CrossFieldEntityValidator {
     @Column(name = "store_id")
     private Long storeId;
 
+    @NotNull
     @Column(name = "first_name")
     @Size(min = 3, max = 45)
     private String firstname;
     
+    @NotNull
     @Size(min = 3, max = 45)
     @Column(name = "last_name")
     private String lastname;
     
     @Size(min = 5, max = 50)
+    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+                        +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+                        +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+              message="{invalid.email}")
     private String email;
 
     @Column(name = "address_id")
@@ -141,8 +150,13 @@ public class Customer implements Serializable, CrossFieldEntityValidator {
         this.version = version;
     }
     
+    /**
+     * Cross field validations.
+     * @return true if firstname and lastname are more than 3 characters OR email is not empty
+     */
     @Override
     public boolean isValid() {
-        return true;
+        return (StringUtils.length(firstname) > 3 && StringUtils.length(lastname) > 3) || StringUtils.isNotBlank(email);
+                
     }
 }
