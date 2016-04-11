@@ -13,12 +13,15 @@ import org.junit.After;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  *
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
-public class ActorManualSetupPersistanceIT {
+public class ActorManualSetupPersistenceIT {
 
     private EntityManager em;
     private EntityTransaction tx;

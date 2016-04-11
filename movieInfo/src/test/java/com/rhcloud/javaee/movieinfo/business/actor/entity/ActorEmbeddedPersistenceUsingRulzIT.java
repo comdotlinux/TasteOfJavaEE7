@@ -17,12 +17,15 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  *
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
-public class ActorEmbeddedPersistanceUsingRulzIT {
+public class ActorEmbeddedPersistenceUsingRulzIT {
 
     @Rule
     public EntityManagerProvider provider = EntityManagerProvider.persistenceUnit("it");
