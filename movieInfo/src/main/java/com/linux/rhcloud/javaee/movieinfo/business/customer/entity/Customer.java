@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -34,11 +35,14 @@ public class Customer implements Serializable, CrossFieldEntityValidator {
     private Long storeId;
 
     @Column(name = "first_name")
+    @Size(min = 3, max = 45)
     private String firstname;
     
+    @Size(min = 3, max = 45)
     @Column(name = "last_name")
     private String lastname;
     
+    @Size(min = 5, max = 50)
     private String email;
 
     @Column(name = "address_id")
