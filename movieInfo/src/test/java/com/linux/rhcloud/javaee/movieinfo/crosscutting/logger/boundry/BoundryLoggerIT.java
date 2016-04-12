@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.linux.rhcloud.javaee.movieinfo.crosscutting.logger.boundry;
 
 import java.lang.reflect.Method;
@@ -46,7 +41,7 @@ public class BoundryLoggerIT {
     @Test
     public void testInjectionWithArquillian() throws Exception{
         InvocationContext ic = createNiceMock(InvocationContext.class);
-        Method m = Object.class.getMethod("toString", null);
+        Method m = Object.class.getMethod("equals", Object.class);
         expect(ic.getMethod()).andReturn(m).anyTimes();
         replay(ic);
         
