@@ -30,12 +30,17 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
 @Entity(name = "address")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries(@NamedQuery(name = GET_ALL_ADDRESSES, query = "SELECT a FROM address a"))
 public class Address implements Serializable {
 

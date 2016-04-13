@@ -5,6 +5,7 @@
         <class>com.linux.rhcloud.javaee.movieinfo.business.address.entity.Address</class>
         <class>com.linux.rhcloud.javaee.movieinfo.business.customer.entity.Customer</class>
         <class>com.linux.rhcloud.javaee.movieinfo.business.film.entity.Film</class>
+        <class>com.linux.rhcloud.javaee.movieinfo.business.city.entity.City</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:derby:./itdb;create=true"/>
