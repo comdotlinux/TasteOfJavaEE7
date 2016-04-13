@@ -18,6 +18,7 @@
  */
 package com.linux.rhcloud.javaee.movieinfo.business.address.entity;
 
+import static com.linux.rhcloud.javaee.movieinfo.business.address.entity.Address.GET_ALL_ADDRESSES;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -25,6 +26,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -32,10 +35,18 @@ import javax.persistence.TemporalType;
  *
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
-@Entity
+@Entity(name = "address")
+@NamedQueries(@NamedQuery(name = GET_ALL_ADDRESSES, query = "SELECT a FROM address a"))
 public class Address implements Serializable {
 
     private static final long serialVersionUID = -3719903575834930580L;
+    
+     private static final String PREFIX = "movieinfo.business.address.entity.";
+
+    /**
+     * Named Query :: {@value #GET_ALL_ADDRESSES} to get all actors
+     */
+    public static final String GET_ALL_ADDRESSES = PREFIX + "findAll";
 
     @Id
     @GeneratedValue

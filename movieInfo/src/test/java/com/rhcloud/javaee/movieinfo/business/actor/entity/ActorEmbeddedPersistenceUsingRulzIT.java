@@ -7,15 +7,12 @@ package com.rhcloud.javaee.movieinfo.business.actor.entity;
 
 import com.airhacks.rulz.em.EntityManagerProvider;
 import com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Test;
 import org.junit.Rule;
 import static com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor.FIND_ALL_ACTORS;
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.TypedQuery;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

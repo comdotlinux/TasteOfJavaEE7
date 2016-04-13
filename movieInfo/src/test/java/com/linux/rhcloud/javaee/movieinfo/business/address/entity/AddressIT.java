@@ -19,9 +19,17 @@
 package com.linux.rhcloud.javaee.movieinfo.business.address.entity;
 
 import com.airhacks.rulz.em.EntityManagerProvider;
-import org.junit.Before;
+import static com.linux.rhcloud.javaee.movieinfo.business.address.entity.Address.GET_ALL_ADDRESSES;
+import java.util.Arrays;
+import java.util.List;
+import javax.persistence.Query;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Rule;
 
 /**
@@ -29,26 +37,93 @@ import org.junit.Rule;
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
 public class AddressIT {
-    
-     @Rule
+
+    @Rule
     public EntityManagerProvider provider = EntityManagerProvider.persistenceUnit("it");
+
+    @Before
+    public void setUp() {
+        EntityManagerProvider prov = EntityManagerProvider.persistenceUnit("it");
+        prov.tx().begin();
+        Query truncateTable = prov.em().createNativeQuery("TRUNCATE TABLE ADDRESS");
+        int executeUpdate = truncateTable.executeUpdate();
+        prov.em().flush();
+        prov.tx().commit();
+        System.out.println("AddressIT.setUp() : truncate output " + executeUpdate);
+        
+        provider.tx().begin();;
+    }
     
-//    @Before
-//    public void setUp() {
-//    }
+    @After
+    public void tearDown() {
+        provider.em().flush();
+        provider.tx().commit();
+    }
 
-     @Test
-     public void GetAddressById() {
-         Address address = new Address();
-         address.setAddress("1121 North Main Street");
-         address.setAddress2("Loja Avenue");
-         address.setDistrict("California");
-         address.setCityId(449L);
-         address.setPostalCode("17886");
-         address.setPhone("838635286649");
+    @Test
+    public void saveAddress() {
+        Address address = new Address();
+        address.setAddress("1121 North Main Street");
+        address.setAddress2("Loja Avenue");
+        address.setDistrict("California");
+        address.setCityId(449L);
+        address.setPostalCode("17886");
+        address.setPhone("838635286649");
 
-         provider.tx().begin();
-         provider.em().persist(address);
-         provider.tx().commit();
-     }
+        Address actual = provider.em().merge(address);
+
+        assertThat(actual.getId(), is(notNullValue()));
+        
+        Address findActual = provider.em().find(Address.class, actual.getId());
+        
+        assertThat(findActual.getAddress(), is(equalTo(actual.getAddress())));
+        
+        provider.em().remove(findActual);
+        
+    }
+
+    @Test
+    public void retrieveAddress() {
+        Address address1 = new Address();
+        address1.setAddress("1121 North Main Street");
+        address1.setAddress2("Loja Avenue");
+        address1.setDistrict("California");
+        address1.setCityId(449L);
+        address1.setPostalCode("17886");
+        address1.setPhone("838635286649");
+
+        Address address2 = new Address();
+        address2.setAddress("1121 North Main Street");
+        address2.setAddress2("Loja Avenue");
+        address2.setDistrict("California");
+        address2.setCityId(449L);
+        address2.setPostalCode("17886");
+        address2.setPhone("838635286649");
+
+        Address address3 = new Address();
+        address3.setAddress("1121 North Main Street");
+        address3.setAddress2("Loja Avenue");
+        address3.setDistrict("California");
+        address3.setCityId(449L);
+        address3.setPostalCode("17886");
+        address3.setPhone("838635286649");
+
+        Address address4 = new Address();
+        address4.setAddress("1121 North Main Street");
+        address4.setAddress2("Loja Avenue");
+        address4.setDistrict("California");
+        address4.setCityId(449L);
+        address4.setPostalCode("17886");
+        address4.setPhone("838635286649");
+
+        List<Address> expectedAdrList = Arrays.asList(address1, address2, address3, address4);
+        expectedAdrList.stream().forEach((adr) -> {
+            provider.em().merge(adr);
+        });
+        
+        List<Address> allAddresses = provider.em().createNamedQuery(GET_ALL_ADDRESSES, Address.class).getResultList();
+
+        assertThat(allAddresses.size(), is(expectedAdrList.size()));
+    }
+    
 }
