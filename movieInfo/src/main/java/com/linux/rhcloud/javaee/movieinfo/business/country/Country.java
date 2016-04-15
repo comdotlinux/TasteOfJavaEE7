@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity(name = "country")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@NamedQueries(@NamedQuery(name = GET_ALL_COUNTRIES, query = "SELECT c FROM ccountry c"))
+@NamedQueries(@NamedQuery(name = GET_ALL_COUNTRIES, query = "SELECT c FROM country c"))
 public class Country implements Serializable {
     
     private static final long serialVersionUID = 2456594345117210500L;

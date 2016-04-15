@@ -19,6 +19,7 @@
 package com.linux.rhcloud.javaee.movieinfo.business.address.entity;
 
 import static com.linux.rhcloud.javaee.movieinfo.business.address.entity.Address.GET_ALL_ADDRESSES;
+import com.linux.rhcloud.javaee.movieinfo.business.city.entity.City;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -28,6 +29,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -64,8 +66,8 @@ public class Address implements Serializable {
     
     private String district;
     
-    @Column(name = "city_id")
-    private Long cityId;
+    @OneToOne
+    private City city;
     
     private String postalCode;
     
@@ -110,14 +112,6 @@ public class Address implements Serializable {
         this.district = district;
     }
 
-    public Long getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
-    }
-
     public String getPostalCode() {
         return postalCode;
     }
@@ -149,4 +143,13 @@ public class Address implements Serializable {
     public void setLocation(byte[] location) {
         this.location = location;
     }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+    
 }

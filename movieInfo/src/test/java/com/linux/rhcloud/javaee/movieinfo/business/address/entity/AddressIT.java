@@ -20,6 +20,8 @@ package com.linux.rhcloud.javaee.movieinfo.business.address.entity;
 
 import com.airhacks.rulz.em.EntityManagerProvider;
 import static com.linux.rhcloud.javaee.movieinfo.business.address.entity.Address.GET_ALL_ADDRESSES;
+import com.linux.rhcloud.javaee.movieinfo.business.city.entity.City;
+import com.linux.rhcloud.javaee.movieinfo.business.country.Country;
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.Query;
@@ -45,13 +47,23 @@ public class AddressIT {
     public void setUp() {
         EntityManagerProvider prov = EntityManagerProvider.persistenceUnit("it");
         prov.tx().begin();
-        Query truncateTable = prov.em().createNativeQuery("TRUNCATE TABLE ADDRESS");
+        
+        Query truncateTable = prov.em().createNativeQuery("DELETE FROM ADDRESS");
         int executeUpdate = truncateTable.executeUpdate();
+        System.out.println("AddressIT.setUp() : truncate Address output " + executeUpdate);
+
+        Query truncateTableCity = prov.em().createNativeQuery("DELETE FROM CITY");
+        executeUpdate = truncateTableCity.executeUpdate();
+        System.out.println("AddressIT.setUp() : truncate city output " + executeUpdate);
+        
+        Query truncateTableCountry = prov.em().createNativeQuery("DELETE FROM COUNTRY");
+        executeUpdate = truncateTableCountry.executeUpdate();
+        System.out.println("AddressIT.setUp() : truncate country output " + executeUpdate);
+        
         prov.em().flush();
         prov.tx().commit();
-        System.out.println("AddressIT.setUp() : truncate output " + executeUpdate);
         
-        provider.tx().begin();;
+        provider.tx().begin();
     }
     
     @After
@@ -62,11 +74,18 @@ public class AddressIT {
 
     @Test
     public void saveAddress() {
+        Country country = new Country();
+        country.setCountry("US");
+        
+        City city = new City();
+        city.setCity("NY");
+        city.setCountry(country);
+        
         Address address = new Address();
         address.setAddress("1121 North Main Street");
         address.setAddress2("Loja Avenue");
         address.setDistrict("California");
-        address.setCityId(449L);
+        address.setCity(city);
         address.setPostalCode("17886");
         address.setPhone("838635286649");
 
@@ -84,11 +103,18 @@ public class AddressIT {
 
     @Test
     public void retrieveAddress() {
+        Country country = new Country();
+        country.setCountry("US");
+        
+        City city = new City();
+        city.setCity("NY");
+        city.setCountry(country);
+        
         Address address1 = new Address();
         address1.setAddress("1121 North Main Street");
         address1.setAddress2("Loja Avenue");
         address1.setDistrict("California");
-        address1.setCityId(449L);
+        address1.setCity(city);
         address1.setPostalCode("17886");
         address1.setPhone("838635286649");
 
@@ -96,7 +122,7 @@ public class AddressIT {
         address2.setAddress("1121 North Main Street");
         address2.setAddress2("Loja Avenue");
         address2.setDistrict("California");
-        address2.setCityId(449L);
+        address2.setCity(city);
         address2.setPostalCode("17886");
         address2.setPhone("838635286649");
 
@@ -104,7 +130,7 @@ public class AddressIT {
         address3.setAddress("1121 North Main Street");
         address3.setAddress2("Loja Avenue");
         address3.setDistrict("California");
-        address3.setCityId(449L);
+        address3.setCity(city);
         address3.setPostalCode("17886");
         address3.setPhone("838635286649");
 
@@ -112,7 +138,7 @@ public class AddressIT {
         address4.setAddress("1121 North Main Street");
         address4.setAddress2("Loja Avenue");
         address4.setDistrict("California");
-        address4.setCityId(449L);
+        address4.setCity(city);
         address4.setPostalCode("17886");
         address4.setPhone("838635286649");
 

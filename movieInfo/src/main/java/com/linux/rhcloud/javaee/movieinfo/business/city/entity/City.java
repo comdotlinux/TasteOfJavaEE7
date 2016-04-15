@@ -19,6 +19,7 @@
 package com.linux.rhcloud.javaee.movieinfo.business.city.entity;
 
 import static com.linux.rhcloud.javaee.movieinfo.business.city.entity.City.GET_ALL_CITIES;
+import com.linux.rhcloud.javaee.movieinfo.business.country.Country;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -27,6 +28,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -59,8 +61,8 @@ public class City implements Serializable {
     
     private String city;
     
-    @Column(name = "country_id")
-    private Long countryId;
+    @OneToOne
+    private Country country;
     
     
     @Column(name = "last_update")
@@ -83,20 +85,20 @@ public class City implements Serializable {
         this.city = city;
     }
 
-    public Long getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(Long countryId) {
-        this.countryId = countryId;
-    }
-
     public Date getLastUpdate() {
         return lastUpdate;
     }
 
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
     
     
