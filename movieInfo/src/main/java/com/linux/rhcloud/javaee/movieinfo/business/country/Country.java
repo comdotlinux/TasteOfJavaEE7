@@ -21,6 +21,7 @@ package com.linux.rhcloud.javaee.movieinfo.business.country;
 import static com.linux.rhcloud.javaee.movieinfo.business.country.Country.GET_ALL_COUNTRIES;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -91,6 +92,32 @@ public class Country implements Serializable {
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.country);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Country other = (Country) obj;
+        if (!Objects.equals(this.country, other.country)) {
+            return false;
+        }
+        return true;
+    }
+    
     
     
 }

@@ -18,14 +18,13 @@
  */
 package com.linux.rhcloud.javaee.movieinfo.business.country;
 
-import com.linux.rhcloud.javaee.movieinfo.business.city.entity.*;
 import com.airhacks.rulz.em.EntityManagerProvider;
 import static com.linux.rhcloud.javaee.movieinfo.business.country.Country.GET_ALL_COUNTRIES;
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.Query;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import org.junit.After;
 import org.junit.Test;
@@ -86,16 +85,16 @@ public class CountryIT {
         country1.setCountry("INDIA");
 
         Country country2 = new Country();
-        country2.setCountry("INDIA");
+        country2.setCountry("US");
 
         Country country3 = new Country();
-        country3.setCountry("INDIA");
+        country3.setCountry("GERMANY");
 
         Country country4 = new Country();
-        country4.setCountry("INDIA");
+        country4.setCountry("IRELAND");
 
         Country country5 = new Country();
-        country5.setCountry("INDIA");
+        country5.setCountry("NEW ZELAND");
 
         List<Country> expectedCityList = Arrays.asList(country1, country2, country3, country4, country5);
         expectedCityList.stream().forEach((c) -> {
@@ -105,6 +104,7 @@ public class CountryIT {
         List<Country> allCities = provider.em().createNamedQuery(GET_ALL_COUNTRIES, Country.class).getResultList();
 
         assertThat(allCities.size(), is(expectedCityList.size()));
+        assertThat(allCities, hasItems(country1, country2, country3, country4, country5));
     }
 
 }
