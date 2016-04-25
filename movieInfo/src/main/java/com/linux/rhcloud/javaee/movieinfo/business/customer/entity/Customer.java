@@ -1,5 +1,6 @@
 package com.linux.rhcloud.javaee.movieinfo.business.customer.entity;
 
+import com.linux.rhcloud.javaee.movieinfo.business.address.entity.Address;
 import com.linux.rhcloud.javaee.movieinfo.crosscutting.entityvalidation.CrossFieldCheck;
 import com.linux.rhcloud.javaee.movieinfo.crosscutting.entityvalidation.CrossFieldEntityValidator;
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
@@ -54,8 +56,8 @@ public class Customer implements Serializable, CrossFieldEntityValidator {
               message="{invalid.email}")
     private String email;
 
-    @Column(name = "address_id")
-    private Long addressId;
+    @OneToOne()
+    private Address address;
     
     private Integer active;
     
@@ -110,12 +112,12 @@ public class Customer implements Serializable, CrossFieldEntityValidator {
         this.email = email;
     }
 
-    public Long getAddressId() {
-        return addressId;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Integer getActive() {
