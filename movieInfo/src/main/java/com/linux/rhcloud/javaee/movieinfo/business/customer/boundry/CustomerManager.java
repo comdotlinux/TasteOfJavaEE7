@@ -1,8 +1,9 @@
 package com.linux.rhcloud.javaee.movieinfo.business.customer.boundry;
 
+import com.linux.rhcloud.javaee.movieinfo.business.customer.CustomerControl;
+import com.linux.rhcloud.javaee.movieinfo.business.customer.entity.Customer;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.inject.Inject;
 
 /**
  *
@@ -11,9 +12,11 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class CustomerManager {
     
-    @PersistenceContext
-    EntityManager em;
+    @Inject
+    CustomerControl control;
     
-    
+    public Customer getCustomer() {
+        return control.getCustomerById(0);
+    }
     
 }
