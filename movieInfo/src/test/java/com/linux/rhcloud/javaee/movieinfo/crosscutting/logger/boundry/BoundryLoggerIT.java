@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Integration Test using Arquilian.
  * @author guru
  */
 @RunWith(Arquillian.class)

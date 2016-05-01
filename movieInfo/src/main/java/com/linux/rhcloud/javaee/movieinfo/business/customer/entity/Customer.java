@@ -56,7 +56,7 @@ public class Customer implements Serializable, CrossFieldEntityValidator {
               message="{invalid.email}")
     private String email;
 
-    @OneToOne
+    @OneToOne()
     private Address address;
     
     private Integer active;
