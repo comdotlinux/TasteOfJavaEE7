@@ -21,6 +21,8 @@ package com.linux.rhcloud.javaee.movieinfo.business.customer;
 import com.linux.rhcloud.javaee.movieinfo.business.customer.entity.Customer;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.slf4j.Logger;
+import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  *
@@ -28,11 +30,31 @@ import javax.persistence.PersistenceContext;
  */
 public class CustomerControl {
 
+    private static final Logger LOG = getLogger(CustomerControl.class);
+
     @PersistenceContext
     EntityManager em;
-    
+
     public Customer getCustomerById(long id) {
         return em.find(Customer.class, id);
     }
-    
+
+    public Customer saveOrUpdateCustomer(Customer customer) {
+        return em.merge(customer);
+    }
+
+    public boolean deleteCustomer(Customer customer) {
+        boolean deleted = false;
+        if (customer != null) {
+            try {
+                Customer c = getCustomerById(customer.getId());
+                em.remove(customer);
+                deleted = true;
+            } catch (IllegalArgumentException e) {
+                LOG.warn("Could not remove customer {}", customer);
+            }
+        }
+
+        return deleted;
+    }
 }
