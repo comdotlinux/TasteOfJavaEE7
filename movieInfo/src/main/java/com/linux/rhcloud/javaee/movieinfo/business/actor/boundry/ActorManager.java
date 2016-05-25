@@ -17,6 +17,7 @@
 package com.linux.rhcloud.javaee.movieinfo.business.actor.boundry;
 
 import com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor;
+import com.linux.rhcloud.javaee.movieinfo.business.monitoring.control.InvocationsMonitor;
 import com.linux.rhcloud.javaee.movieinfo.crosscutting.logger.boundry.BoundryLogger;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -33,7 +34,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
 @Stateless
-@Interceptors(BoundryLogger.class)
+@Interceptors(value = {BoundryLogger.class, InvocationsMonitor.class})
 public class ActorManager {
 
     private static final Logger LOG = getLogger(ActorManager.class);
