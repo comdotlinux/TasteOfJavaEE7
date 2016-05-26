@@ -20,11 +20,15 @@ package com.linux.rhcloud.javaee.movieinfo.business.monitoring.boundry;
 
 import com.linux.rhcloud.javaee.movieinfo.business.monitoring.entity.CallEvent;
 import java.util.List;
+import java.util.LongSummaryStatistics;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.client.Entity;
 import static javax.ws.rs.core.MediaType.*;
 
 /**
@@ -43,6 +47,19 @@ public class InvocationsResource {
     @Produces(value = {APPLICATION_JSON, APPLICATION_XML})
     public List<CallEvent> actorCallList() {
         return sink.getEvents();
+    }
+    
+    @Path("/actor-summary")
+    @GET
+    @Produces(APPLICATION_JSON)
+    public JsonObject getSummary() {
+        LongSummaryStatistics statistics = sink.getStatistics();
+        return Json.createObjectBuilder()
+                .add("average-duration", statistics.getAverage())
+                .add("sample-count", statistics.getCount())
+                .add("max-duration", statistics.getMax())
+                .add("min-duration", statistics.getMin())
+                .build();
     }
     
 }
