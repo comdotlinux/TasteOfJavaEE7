@@ -38,7 +38,7 @@ import javax.json.JsonArray;
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 public class MonitorSink {
 
-    CopyOnWriteArrayList<CallEvent> events;
+    private CopyOnWriteArrayList<CallEvent> events;
 
     @PostConstruct
     public void init() {

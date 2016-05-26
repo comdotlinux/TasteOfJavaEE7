@@ -18,10 +18,31 @@
  */
 package com.linux.rhcloud.javaee.movieinfo.business.monitoring.boundry;
 
+import com.linux.rhcloud.javaee.movieinfo.business.monitoring.entity.CallEvent;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import static javax.ws.rs.core.MediaType.*;
+
 /**
  *
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
+@Stateless
+@Path("boundry-invocations")
 public class InvocationsResource {
+    
+    @Inject
+    MonitorSink sink;
+    
+    @Path("/actor")
+    @GET
+    @Produces(value = {APPLICATION_JSON, APPLICATION_XML})
+    public List<CallEvent> actorCallList() {
+        return sink.getEvents();
+    }
     
 }
