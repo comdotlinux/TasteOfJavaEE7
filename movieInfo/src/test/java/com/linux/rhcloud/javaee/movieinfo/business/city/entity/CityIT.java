@@ -20,7 +20,7 @@
 package com.linux.rhcloud.javaee.movieinfo.business.city.entity;
 import com.airhacks.rulz.em.EntityManagerProvider;
 import static com.linux.rhcloud.javaee.movieinfo.business.city.entity.City.GET_ALL_CITIES;
-import com.linux.rhcloud.javaee.movieinfo.business.country.Country;
+import com.linux.rhcloud.javaee.movieinfo.business.country.entity.Country;
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.Query;

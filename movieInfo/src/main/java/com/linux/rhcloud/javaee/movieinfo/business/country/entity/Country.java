@@ -16,9 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-package com.linux.rhcloud.javaee.movieinfo.business.country;
+package com.linux.rhcloud.javaee.movieinfo.business.country.entity;
 
-import static com.linux.rhcloud.javaee.movieinfo.business.country.Country.GET_ALL_COUNTRIES;
+import static com.linux.rhcloud.javaee.movieinfo.business.country.entity.Country.GET_ALL_COUNTRIES;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;

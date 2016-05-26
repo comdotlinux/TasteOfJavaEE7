@@ -19,8 +19,9 @@
 package com.linux.rhcloud.javaee.movieinfo.business.country;
 
 import com.airhacks.rulz.em.EntityManagerProvider;
-import static com.linux.rhcloud.javaee.movieinfo.business.country.Country.GET_ALL_COUNTRIES;
+import static com.linux.rhcloud.javaee.movieinfo.business.country.entity.Country.GET_ALL_COUNTRIES;
 import java.util.Arrays;
+import com.linux.rhcloud.javaee.movieinfo.business.country.entity.Country;
 import java.util.List;
 import javax.persistence.Query;
 import static org.hamcrest.CoreMatchers.equalTo;

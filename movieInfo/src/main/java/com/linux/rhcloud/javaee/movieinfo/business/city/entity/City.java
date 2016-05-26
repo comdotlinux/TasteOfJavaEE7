@@ -19,7 +19,7 @@
 package com.linux.rhcloud.javaee.movieinfo.business.city.entity;
 
 import static com.linux.rhcloud.javaee.movieinfo.business.city.entity.City.GET_ALL_CITIES;
-import com.linux.rhcloud.javaee.movieinfo.business.country.Country;
+import com.linux.rhcloud.javaee.movieinfo.business.country.entity.Country;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;

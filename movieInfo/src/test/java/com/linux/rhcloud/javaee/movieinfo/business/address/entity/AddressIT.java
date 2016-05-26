@@ -21,7 +21,7 @@ package com.linux.rhcloud.javaee.movieinfo.business.address.entity;
 import com.airhacks.rulz.em.EntityManagerProvider;
 import static com.linux.rhcloud.javaee.movieinfo.business.address.entity.Address.GET_ALL_ADDRESSES;
 import com.linux.rhcloud.javaee.movieinfo.business.city.entity.City;
-import com.linux.rhcloud.javaee.movieinfo.business.country.Country;
+import com.linux.rhcloud.javaee.movieinfo.business.country.entity.Country;
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.Query;
