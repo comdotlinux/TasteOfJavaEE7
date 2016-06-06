@@ -1,7 +1,7 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <head jsf:id="head">
+        <meta charset="UTF-8" jsf:id="meta">
         <title>My JSF Login Form</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"></link>
@@ -9,16 +9,23 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"></link>
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        <h:outputStylesheet library="css" name="app.css"></h:outputStylesheet>
-    </h:head>
-    <h:body>
+        <script jsf:name="app.css" type="text/css" rel="stylesheet"/>
+    <head>
+    <body jsf:id="body">
         <h3>Basic</h3>
-        <p:spacer/>
         <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
         <h:link value="Actors..." outcome="#{index.actorView}"/>
         <p/>
         <h:link value="Films..." outcome="#{index.filmView}"/>
-        
-    </h:body>
+        <div class="list-group">
+            <a href="#" class="list-group-item" />
+            <a href="#" class="list-group-item">Morbi leo risus</a>
+            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+            <a href="#" class="list-group-item">Vestibulum at eros</a>
+            <a href="#" class="list-group-item disabled">
+                Cras justo odio
+            </a>
+        </div>
+    <body>
 </html>
 
