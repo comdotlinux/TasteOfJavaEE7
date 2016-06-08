@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:jsf="http://xmlns.jcp.org/jsf">
+<html xmlns:jsf="http://xmlns.jcp.org/jsf">
     <head jsf:id="head">
         <meta charset="UTF-8" jsf:id="meta">
         <title>My JSF Login Form</title>
@@ -13,17 +13,13 @@
     <head>
     <body jsf:id="body">
         <h3>Basic</h3>
-        <h:link value="Actors..." outcome="#{index.actorView}"/>
+<!--        <h:link value="" outcome="#{index.actorView}"/>
         <p/>
-        <h:link value="Films..." outcome="#{index.filmView}"/>
+        <h:link value="" outcome="#{index.filmView}"/>-->
         <div class="list-group">
-            <a href="#" class="list-group-item" />
-            <a href="#" class="list-group-item">Morbi leo risus</a>
-            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-            <a href="#" class="list-group-item">Vestibulum at eros</a>
-            <a href="#" class="list-group-item disabled">
-                Cras justo odio
-            </a>
+            <a jsf:value="#{index.actorView}" class="list-group-item">Actors...</a>
+            <a jsf:value="#{index.filmView}" class="list-group-item">Films...</a>
+            <a href="#" class="list-group-item disabled">Address.</a>
         </div>
     <body>
 </html>
