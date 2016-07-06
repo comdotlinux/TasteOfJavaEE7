@@ -19,16 +19,17 @@ import javax.validation.constraints.Size;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- *
+ * If You are using default database sakila from MySQL Samples, the version column is missing.
+ * Please run :: <br>
+ * {@code ALTER TABLE sakila.customer ADD version integer NOT NULL DEFAULT 1;} <br>
+ * {@code ALTER TABLE sakila.customer CHANGE version version integer NOT NULL;} <br>
+ * on the sakila database to make the application work.(Works on MYSQL Database) <br>
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
 @Entity
 @CrossFieldCheck
 public class Customer implements Serializable, CrossFieldEntityValidator {
 
-    // Run on all Databases
-    // ALTER TABLE `sakila`.`customer` ADD `version` integer NOT NULL DEFAULT 1;
-    // ALTER TABLE `sakila`.`customer` CHANGE `version` `version` integer NOT NULL;
     private static final long serialVersionUID = 3591581933385747274L;
     
     @Id

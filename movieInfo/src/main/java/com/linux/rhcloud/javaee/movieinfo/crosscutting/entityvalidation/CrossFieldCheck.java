@@ -9,7 +9,7 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
- *
+ * The @interface for Cross Field Validator
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
 @Documented

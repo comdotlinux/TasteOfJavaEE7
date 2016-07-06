@@ -40,7 +40,11 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 import static com.linux.rhcloud.javaee.movieinfo.business.actor.entity.Actor.FIND_ALL_ACTORS;
 /**
  * Actor Entity
- *
+ * If You are using default database sakila from MySQL Samples, the version column is missing.
+ * Please run :: <br>
+ * {@code ALTER TABLE sakila.actor ADD version integer NOT NULL DEFAULT 1;} <br>
+ * {@code ALTER TABLE sakila.actor CHANGE version version integer NOT NULL;} <br>
+ * on the sakila database to make the application work.(Works on MYSQL Database) <br>
  * @author Guruprasad Kulkarni <guru@linux.com>
  */
 @Entity(name = "actor")
