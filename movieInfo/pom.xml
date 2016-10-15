@@ -176,6 +176,13 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <alwaysGenerate>true</alwaysGenerate>
+                    <showGenerated>true</showGenerated>
+                    <addResourcesDirToRebelXml>true</addResourcesDirToRebelXml>
+<!--                    <relativePath>../../</relativePath>
+                    <rebelXmlDirectory>target/classes</rebelXmlDirectory>-->
+                </configuration>
             </plugin>
         </plugins>
     </build>

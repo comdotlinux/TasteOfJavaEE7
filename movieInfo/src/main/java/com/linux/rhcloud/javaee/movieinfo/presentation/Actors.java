@@ -69,7 +69,9 @@ public class Actors {
         LOG.info("Adding Actor {}", this.actor);
         Set<ConstraintViolation<Actor>> actorViolations = validator.validate(this.actor);
         LOG.info("Actor violations are {} ", actorViolations);
+        LOG.info("checking if Violations are empty.");
         if(!actorViolations.isEmpty()){
+            LOG.info("Violations found!!!!!");
             for (ConstraintViolation<Actor> actorViolation : actorViolations) {
                 Path propertyPath = actorViolation.getPropertyPath();
                 String message = actorViolation.getMessage();
