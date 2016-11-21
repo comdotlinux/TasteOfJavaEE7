@@ -25,3 +25,4 @@ hs_err_pid*
 # Log files
 **/*.log
 **/itdb/**
+/movieInfo/nbactions.xml
