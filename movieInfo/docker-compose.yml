@@ -37,7 +37,7 @@ services:
         environment: 
             - "MYSQL_ROOT_PASSWORD=xxxxxxxxxx"
             - "MYSQL_DATABASE=sakila"
-            - "MYSQL_USER=javaee7"
+            - "MYSQL_USER=xxxxxx"
             - "MYSQL_PASSWORD=xxxxxxxxx"
         volumes: 
             - "/c/Users/guru.a.kulkarni/comdotlinux/TasteOfJavaEE7/sakila/mysql-sakila.sql:/docker-entrypoint-initdb.d/mysql-sakila.sql:ro"
