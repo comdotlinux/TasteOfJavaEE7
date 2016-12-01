@@ -9,7 +9,7 @@ services:
             javaee7:
         ports: 
             - "4848:4848"
-            - "8181:8080"
+            - "8080:8080"
             - "8009:8009"
     
     phpmyadmin:
@@ -19,9 +19,9 @@ services:
             - sakila
         environment: 
             - "PMA_HOST=sakila"
-            - "MYSQL_ROOT_PASSWORD=p1GtTYll6jN3"
-            - "MYSQL_USER=javaee7"
-            - "MYSQL_PASSWORD=8JbPr9DMNCsT"
+            - "MYSQL_ROOT_PASSWORD=xxxxxxxxx"
+            - "MYSQL_USER=xxxxxx"
+            - "MYSQL_PASSWORD=xxxxxxxxxx"
         networks:
             javaee7:
         ports:
@@ -35,10 +35,10 @@ services:
         networks: 
             javaee7:
         environment: 
-            - "MYSQL_ROOT_PASSWORD=p1GtTYll6jN3"
+            - "MYSQL_ROOT_PASSWORD=xxxxxxxxxx"
             - "MYSQL_DATABASE=sakila"
             - "MYSQL_USER=javaee7"
-            - "MYSQL_PASSWORD=8JbPr9DMNCsT"
+            - "MYSQL_PASSWORD=xxxxxxxxx"
         volumes: 
             - "/c/Users/guru.a.kulkarni/comdotlinux/TasteOfJavaEE7/sakila/mysql-sakila.sql:/docker-entrypoint-initdb.d/mysql-sakila.sql:ro"
             - "/c/Users/guru.a.kulkarni/comdotlinux/sakila-mysql-db:/var/lib/mysql"
