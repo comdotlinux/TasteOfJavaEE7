@@ -6,7 +6,7 @@
     <artifactId>javaee7app</artifactId>
     <packaging>war</packaging>
     <version>1.0</version>
-    <name>movie-info</name>
+    <name>movieinfo</name>
   
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -195,7 +195,7 @@
             <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
             <id>openshift</id>
             <build>
-                <finalName>javaee7app</finalName>
+                <finalName>movieinfo</finalName>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
